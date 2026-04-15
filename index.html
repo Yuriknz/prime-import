@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prime Import — iPhones & Perfumes Importados</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:#f7f9fc;color:#1a1a2e}
+:root{--blue:#1565C0;--blue-light:#E3F0FF;--blue-mid:#2979FF;--text:#1a1a2e;--muted:#6b7280;--border:#e5e9f2;--white:#fff}
+nav{background:#fff;border-bottom:1px solid var(--border);padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:100}
+.logo{font-family:'Sora',sans-serif;font-size:20px;font-weight:600;color:var(--blue);letter-spacing:-.5px}
+.logo span{color:var(--text)}
+.nav-links{display:flex;gap:24px;list-style:none}
+.nav-links a{text-decoration:none;color:var(--muted);font-size:14px;transition:color .2s}
+.nav-links a:hover{color:var(--blue)}
+.nav-cta{background:var(--blue);color:#fff;border:none;padding:9px 20px;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:opacity .2s}
+.nav-cta:hover{opacity:.88}
+.hero{background:linear-gradient(135deg,#1565C0 0%,#1976D2 60%,#42A5F5 100%);padding:72px 5%;display:flex;align-items:center;justify-content:space-between;gap:40px;min-height:320px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;right:-80px;top:-80px;width:400px;height:400px;border-radius:50%;background:rgba(255,255,255,.05)}
+.hero::after{content:'';position:absolute;right:60px;bottom:-60px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.07)}
+.hero-text{position:relative;z-index:1;max-width:520px}
+.hero-badge{display:inline-block;background:rgba(255,255,255,.15);color:#fff;font-size:12px;padding:4px 14px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px}
+.hero h1{font-family:'Sora',sans-serif;font-size:clamp(28px,4vw,44px);font-weight:600;color:#fff;line-height:1.2;margin-bottom:16px}
+.hero p{color:rgba(255,255,255,.8);font-size:16px;line-height:1.6;margin-bottom:28px;font-weight:300}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-white{background:#fff;color:var(--blue);border:none;padding:12px 24px;border-radius:8px;font-size:15px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:opacity .2s}
+.btn-white:hover{opacity:.9}
+.btn-outline{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.6);padding:12px 24px;border-radius:8px;font-size:15px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
+.btn-outline:hover{background:rgba(255,255,255,.1)}
+.hero-img{position:relative;z-index:1;flex-shrink:0}
+.phone-mockup{width:160px;background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.25);border-radius:24px;padding:16px;text-align:center}
+.phone-mockup .icon{font-size:64px;line-height:1}
+.phone-mockup p{color:rgba(255,255,255,.9);font-size:12px;margin-top:8px}
+.section{padding:56px 5%}
+.section-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:32px}
+.section-title{font-family:'Sora',sans-serif;font-size:22px;font-weight:600;color:var(--text)}
+.section-sub{font-size:13px;color:var(--muted);cursor:pointer;transition:color .2s}
+.section-sub:hover{color:var(--blue)}
+.cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.cat-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:24px 16px;text-align:center;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.cat-card::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,var(--blue-light) 0%,transparent 100%);opacity:0;transition:opacity .2s}
+.cat-card:hover{border-color:var(--blue-mid);transform:translateY(-2px);box-shadow:0 8px 24px rgba(21,101,192,.1)}
+.cat-card:hover::before{opacity:1}
+.cat-icon{font-size:36px;margin-bottom:12px;position:relative;z-index:1}
+.cat-name{font-family:'Sora',sans-serif;font-size:14px;font-weight:500;color:var(--text);position:relative;z-index:1}
+.cat-count{font-size:12px;color:var(--muted);margin-top:4px;position:relative;z-index:1}
+.products-section{background:#f0f4fb;padding:56px 5%}
+.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px}
+.prod-card{background:#fff;border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:all .25s;cursor:pointer}
+.prod-card:hover{box-shadow:0 12px 32px rgba(21,101,192,.12);transform:translateY(-3px);border-color:var(--blue-mid)}
+.prod-img{height:180px;display:flex;align-items:center;justify-content:center;font-size:72px;background:var(--blue-light)}
+.prod-info{padding:16px}
+.prod-tag{font-size:11px;background:var(--blue-light);color:var(--blue);padding:3px 10px;border-radius:20px;font-weight:500;display:inline-block;margin-bottom:8px}
+.prod-tag.perfume{background:#F3E5F5;color:#7B1FA2}
+.prod-name{font-family:'Sora',sans-serif;font-size:14px;font-weight:500;color:var(--text);margin-bottom:6px;line-height:1.4}
+.prod-price{font-size:20px;font-weight:600;color:var(--blue);margin-bottom:12px}
+.prod-price span{font-size:13px;font-weight:400;color:var(--muted)}
+.btn-wpp{width:100%;background:#25D366;color:#fff;border:none;padding:11px;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:8px;transition:opacity .2s}
+.btn-wpp:hover{opacity:.88}
+.wpp-svg{width:18px;height:18px;fill:#fff;flex-shrink:0}
+.trust{background:#fff;padding:40px 5%;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
+.trust-item .t-icon{font-size:28px;margin-bottom:8px}
+.trust-item p{font-size:13px;font-weight:500;color:var(--text);margin-bottom:2px}
+.trust-item span{font-size:12px;color:var(--muted)}
+footer{background:#1a1a2e;padding:32px 5%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+footer .logo{color:#fff}
+footer .logo span{color:rgba(255,255,255,.5)}
+.footer-links{display:flex;gap:20px;list-style:none}
+.footer-links a{text-decoration:none;color:rgba(255,255,255,.5);font-size:13px;transition:color .2s}
+.footer-links a:hover{color:#fff}
+footer small{color:rgba(255,255,255,.4);font-size:12px}
+.wpp-float{position:fixed;bottom:24px;right:24px;background:#25D366;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);cursor:pointer;z-index:200;transition:transform .2s}
+.wpp-float:hover{transform:scale(1.08)}
+.wpp-float svg{width:28px;height:28px;fill:#fff}
+@media(max-width:700px){
+  .cat-grid{grid-template-columns:repeat(2,1fr)}
+  .trust-grid{grid-template-columns:repeat(2,1fr)}
+  .hero{flex-direction:column;padding:48px 5%}
+  .hero-img{display:none}
+  .nav-links{display:none}
+  footer{flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">Prime<span>Import</span></div>
+  <ul class="nav-links">
+    <li><a href="#produtos">iPhones</a></li>
+    <li><a href="#produtos">Perfumes</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+  <button class="nav-cta" onclick="openWpp('Olá! Quero saber mais sobre os produtos da Prime Import.')">Falar no WhatsApp</button>
+</nav>
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-badge">🇧🇷 Entrega para todo o Brasil</div>
+    <h1>iPhones & Perfumes Importados</h1>
+    <p>Produtos originais com os melhores preços. Compre com segurança e receba em casa.</p>
+    <div class="hero-btns">
+      <button class="btn-white" onclick="document.getElementById('produtos').scrollIntoView({behavior:'smooth'})">Ver Produtos</button>
+      <button class="btn-outline" onclick="openWpp('Olá! Gostaria de tirar dúvidas sobre os produtos.')">Tirar Dúvidas</button>
+    </div>
+  </div>
+  <div class="hero-img">
+    <div class="phone-mockup">
+      <div class="icon">📱</div>
+      <p>iPhones originais<br>lacrado, vitrine e semi-novo</p>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="section-header">
+    <h2 class="section-title">Categorias</h2>
+    <span class="section-sub" onclick="document.getElementById('produtos').scrollIntoView({behavior:'smooth'})">Ver todos →</span>
+  </div>
+  <div class="cat-grid">
+    <div class="cat-card" onclick="filterCategory('lacrado')"><div class="cat-icon">📦</div><div class="cat-name">iPhone Lacrado</div><div class="cat-count">Novos, selados de fábrica</div></div>
+    <div class="cat-card" onclick="filterCategory('vitrine')"><div class="cat-icon">🏪</div><div class="cat-name">iPhone Vitrine</div><div class="cat-count">Sem marcas de uso</div></div>
+    <div class="cat-card" onclick="filterCategory('semi-novo')"><div class="cat-icon">✨</div><div class="cat-name">iPhone Semi-novo</div><div class="cat-count">Revisados e garantidos</div></div>
+    <div class="cat-card" onclick="filterCategory('perfume')"><div class="cat-icon">🌹</div><div class="cat-name">Perfumes Importados</div><div class="cat-count">Nacionais, árabes e europeus</div></div>
+  </div>
+</section>
+<section class="products-section" id="produtos">
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="section-header">
+      <h2 class="section-title">Produtos em Destaque</h2>
+      <span class="section-sub" id="filter-label" onclick="resetFilter()"></span>
+    </div>
+    <div class="prod-grid" id="prod-grid"></div>
+  </div>
+</section>
+<section class="trust" id="contato">
+  <div class="trust-grid">
+    <div class="trust-item"><div class="t-icon">🔒</div><p>Compra Segura</p><span>Pague só quando confirmar</span></div>
+    <div class="trust-item"><div class="t-icon">🚚</div><p>Envio para o Brasil</p><span>Correios e transportadoras</span></div>
+    <div class="trust-item"><div class="t-icon">✅</div><p>Produtos Originais</p><span>Garantia de procedência</span></div>
+    <div class="trust-item"><div class="t-icon">💬</div><p>Suporte pelo WhatsApp</p><span>Respondemos rápido</span></div>
+  </div>
+</section>
+<footer>
+  <div class="logo">Prime<span>Import</span></div>
+  <ul class="footer-links">
+    <li><a href="#produtos">iPhones</a></li>
+    <li><a href="#produtos">Perfumes</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+  <small>© 2025 Prime Import. Todos os direitos reservados.</small>
+</footer>
+<div class="wpp-float" onclick="openWpp('Olá! Vim pelo site da Prime Import e quero saber mais.')">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</div>
+<script>
+const WPP='5511999999999';
+const produtos=[
+  {id:1,cat:'lacrado',tag:'iPhone Lacrado',icon:'📦',nome:'iPhone 15 Pro Max 256GB',preco:'R$ 7.499',sub:'Lacrado · Garantia 1 ano'},
+  {id:2,cat:'lacrado',tag:'iPhone Lacrado',icon:'📦',nome:'iPhone 15 128GB',preco:'R$ 5.299',sub:'Lacrado · Garantia 1 ano'},
+  {id:3,cat:'vitrine',tag:'iPhone Vitrine',icon:'🏪',nome:'iPhone 14 Pro 256GB',preco:'R$ 4.899',sub:'Vitrine · Como novo'},
+  {id:4,cat:'vitrine',tag:'iPhone Vitrine',icon:'🏪',nome:'iPhone 14 128GB',preco:'R$ 3.799',sub:'Vitrine · Sem marcas'},
+  {id:5,cat:'semi-novo',tag:'iPhone Semi-novo',icon:'✨',nome:'iPhone 13 128GB',preco:'R$ 2.899',sub:'Semi-novo · Revisado'},
+  {id:6,cat:'semi-novo',tag:'iPhone Semi-novo',icon:'✨',nome:'iPhone 12 64GB',preco:'R$ 1.999',sub:'Semi-novo · Garantia 6m'},
+  {id:7,cat:'perfume',tag:'Perfume Importado',icon:'🌹',nome:'Lattafa Oud for Glory 100ml',preco:'R$ 189',sub:'Árabe · Concentrado'},
+  {id:8,cat:'perfume',tag:'Perfume Importado',icon:'🌹',nome:'Al Haramain Amber Oud 60ml',preco:'R$ 149',sub:'Árabe · Longa duração'},
+];
+const wppSVG=`<svg class="wpp-svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>`;
+function renderProds(list){
+  document.getElementById('prod-grid').innerHTML=list.map(p=>`
+    <div class="prod-card">
+      <div class="prod-img">${p.icon}</div>
+      <div class="prod-info">
+        <span class="prod-tag${p.cat==='perfume'?' perfume':''}">${p.tag}</span>
+        <div class="prod-name">${p.nome}</div>
+        <div class="prod-price">${p.preco} <span>/ ${p.sub}</span></div>
+        <button class="btn-wpp" onclick="openWpp('Olá! Tenho interesse no produto: ${p.nome} (${p.preco}). Ainda está disponível?')">
+          ${wppSVG} Pedir pelo WhatsApp
+        </button>
+      </div>
+    </div>`).join('');
+}
+function filterCategory(cat){
+  document.getElementById('filter-label').textContent='✕ Limpar filtro';
+  document.getElementById('produtos').scrollIntoView({behavior:'smooth'});
+  renderProds(produtos.filter(p=>p.cat===cat));
+}
+function resetFilter(){
+  document.getElementById('filter-label').textContent='';
+  renderProds(produtos);
+}
+function openWpp(msg){
+  window.open(`https://wa.me/${WPP}?text=${encodeURIComponent(msg)}`,'_blank');
+}
+renderProds(produtos);
+</script>
+</body>
+</html>
