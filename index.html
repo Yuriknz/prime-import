@@ -3,346 +3,460 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MoveOn — Fisioterapia Moderna</title>
+<title>Conexão Pilates — Fisioterapia Moderna</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
+/* ─────────────────────────────────────────
+   TOKENS
+───────────────────────────────────────── */
 :root {
-  --teal:#0A7C6E; --teal-light:#12A896; --teal-pale:#E0F5F2;
-  --orange:#F26522; --orange-pale:#FFF0E8;
-  --dark:#0F1F1D; --text:#1A2E2B; --text-mid:#4A6562; --text-light:#8AADAA;
-  --off-white:#F7FAFA; --white:#FFFFFF; --border:#D8ECEA;
-}
-*{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{
-  background:var(--white); color:var(--text);
-  font-family:'Instrument Sans',sans-serif; font-weight:400;
-  overflow-x:hidden; -webkit-text-size-adjust:100%;
+  --teal:#097A6C;
+  --teal-2:#0A8F7F;
+  --teal-pale:#E4F4F1;
+  --orange:#E8601A;
+  --orange-pale:#FEF0E8;
+  --dark:#0C1E1C;
+  --text:#162622;
+  --mid:#3D6460;
+  --muted:#7AADAA;
+  --bg:#FFFFFF;
+  --off:#F5FAFA;
+  --bdr:#CBE8E4;
+  --r:10px;
 }
 
-/* NAV */
-nav{
-  position:sticky; top:0; z-index:200;
-  background:rgba(255,255,255,0.97); backdrop-filter:blur(12px);
-  border-bottom:1px solid var(--border);
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; font-size:16px; }
+body {
+  font-family:'Outfit', system-ui, sans-serif;
+  font-weight:400; color:var(--text);
+  background:var(--bg); overflow-x:hidden;
+  -webkit-text-size-adjust:100%; line-height:1.6;
+}
+a { color:inherit; text-decoration:none; }
+
+/* ─────────────────────────────────────────
+   LAYOUT
+───────────────────────────────────────── */
+.wrap {
+  width:100%; max-width:1200px;
+  margin:0 auto;
   padding:0 20px;
-  display:flex; align-items:center; justify-content:space-between;
-  height:60px;
 }
-.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:19px;color:var(--teal);letter-spacing:-.5px;}
-.nav-logo span{color:var(--orange);}
-.nav-links{display:none;gap:28px;list-style:none;}
-.nav-links a{color:var(--text-mid);text-decoration:none;font-size:13px;font-weight:500;transition:color .2s;}
-.nav-links a:hover{color:var(--teal);}
-.nav-pill{
-  background:var(--teal);color:white;
-  padding:9px 18px;border-radius:100px;
-  font-size:13px;font-weight:600;text-decoration:none;transition:all .2s;white-space:nowrap;
-}
-.nav-pill:hover{background:var(--teal-light);}
+.section { padding:72px 0; }
 
-/* HERO */
-.hero{
-  background:var(--off-white);
-  padding:48px 20px 56px;
-  display:flex; flex-direction:column; gap:0;
+/* ─────────────────────────────────────────
+   NAV
+───────────────────────────────────────── */
+.nav {
+  position:sticky; top:0; z-index:300;
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--bdr);
 }
-.hero-tag{
-  display:inline-flex;align-items:center;gap:8px;
-  background:var(--teal-pale);border:1px solid rgba(10,124,110,.2);
-  color:var(--teal);padding:7px 14px;border-radius:100px;
-  font-size:12px;font-weight:500;margin-bottom:24px;width:fit-content;
+.nav-inner {
+  display:flex; align-items:center;
+  justify-content:space-between; height:62px;
 }
-.hero-tag-dot{width:7px;height:7px;background:var(--teal-light);border-radius:50%;flex-shrink:0;animation:pulse 2s infinite;}
-@keyframes pulse{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.3);opacity:.7;}}
-.hero h1{
-  font-family:'Syne',sans-serif;
-  font-size:clamp(38px,10vw,64px);
-  font-weight:800;line-height:1.05;color:var(--dark);
-  letter-spacing:-2px;margin-bottom:18px;
+.nav-logo {
+  font-family:'Outfit',sans-serif; font-weight:900;
+  font-size:1.2rem; color:var(--teal);
+  letter-spacing:-.03em; white-space:nowrap;
 }
-.hero h1 .highlight{color:var(--teal);}
-.hero h1 .accent{color:var(--orange);}
-.hero-sub{font-size:15px;line-height:1.75;color:var(--text-mid);margin-bottom:32px;}
-.hero-actions{display:flex;flex-direction:column;gap:12px;margin-bottom:40px;}
-.btn-teal{
-  background:var(--teal);color:white;
-  padding:15px 28px;border-radius:100px;
-  font-size:14px;font-weight:600;text-decoration:none;
-  transition:all .25s;display:flex;align-items:center;justify-content:center;gap:8px;
+.nav-logo em { font-style:normal; color:var(--orange); }
+.nav-menu { display:none; list-style:none; gap:32px; }
+.nav-menu a {
+  font-size:.875rem; font-weight:500; color:var(--mid);
+  transition:color .2s;
 }
-.btn-teal:hover{background:var(--teal-light);}
-.btn-wa{
-  background:#25D366;color:white;
-  padding:15px 28px;border-radius:100px;
-  font-size:14px;font-weight:600;text-decoration:none;
-  transition:all .25s;display:flex;align-items:center;justify-content:center;gap:8px;
+.nav-menu a:hover { color:var(--teal); }
+.nav-pill {
+  background:var(--teal); color:#fff;
+  font-size:.8125rem; font-weight:700;
+  padding:10px 20px; border-radius:100px;
+  transition:background .2s; white-space:nowrap;
 }
-.btn-wa:hover{filter:brightness(1.1);}
-.hero-trust{
-  display:flex;align-items:center;gap:14px;
-  padding-top:28px;border-top:1px solid var(--border);
-}
-.trust-avatars{display:flex;}
-.trust-avatar{
-  width:32px;height:32px;border-radius:50%;border:2px solid white;margin-right:-8px;
-  background:linear-gradient(135deg,var(--teal-pale),var(--teal));
-  display:flex;align-items:center;justify-content:center;
-  font-size:11px;font-weight:700;color:var(--teal);flex-shrink:0;
-}
-.trust-text strong{display:block;font-size:13px;font-weight:600;color:var(--dark);}
-.trust-text span{font-size:11px;color:var(--text-mid);}
+.nav-pill:hover { background:var(--teal-2); }
 
-/* BAND */
-.band{
-  background:var(--dark);color:white;
-  padding:16px 20px;
-  display:flex;gap:0;overflow:hidden;
+/* ─────────────────────────────────────────
+   HERO
+───────────────────────────────────────── */
+.hero {
+  background:var(--off);
+  padding:60px 0 72px;
 }
-.band-inner{
-  display:flex;gap:32px;animation:marquee 20s linear infinite;flex-shrink:0;
-  white-space:nowrap;
+.hero-inner {
+  display:flex; flex-direction:column; gap:40px;
 }
-@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
-.band-item{display:flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.5px;flex-shrink:0;}
-.band-dot{width:5px;height:5px;background:var(--teal-light);border-radius:50%;flex-shrink:0;}
+.hero-tag {
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--teal-pale); border:1px solid rgba(9,122,108,.2);
+  color:var(--teal); padding:7px 16px; border-radius:100px;
+  font-size:.8125rem; font-weight:600; width:fit-content;
+}
+.tag-dot {
+  width:8px; height:8px; background:var(--teal-2);
+  border-radius:50%; flex-shrink:0;
+  animation:pulse 2s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.4);opacity:.6} }
 
-/* SECTION */
-.section{padding:64px 20px;}
-.sec-label{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-bottom:10px;}
-.sec-title{
-  font-family:'Syne',sans-serif;font-size:clamp(28px,8vw,50px);
-  font-weight:800;letter-spacing:-1.5px;line-height:1.1;color:var(--dark);
+.hero-title {
+  font-family:'Outfit',sans-serif; font-weight:900;
+  font-size:clamp(2.25rem, 7vw, 4rem);
+  line-height:1.05; letter-spacing:-.03em; color:var(--dark);
+  margin-top:16px;
 }
-.sec-title span{color:var(--teal);}
+.hero-title .hl { color:var(--teal); }
+.hero-title .or { color:var(--orange); }
+.hero-sub {
+  font-size:1.0625rem; line-height:1.75; color:var(--mid);
+  margin-top:14px; margin-bottom:28px; max-width:520px;
+}
+.hero-btns { display:flex; flex-wrap:wrap; gap:12px; }
+.btn-teal {
+  background:var(--teal); color:#fff;
+  font-size:.9375rem; font-weight:700;
+  padding:14px 26px; border-radius:100px;
+  transition:background .2s; display:inline-block;
+}
+.btn-teal:hover { background:var(--teal-2); }
+.btn-wa {
+  background:#25D366; color:#fff;
+  font-size:.9375rem; font-weight:700;
+  padding:14px 22px; border-radius:100px;
+  transition:filter .2s; display:inline-flex;
+  align-items:center; gap:8px;
+}
+.btn-wa:hover { filter:brightness(1.1); }
+.hero-trust {
+  display:flex; align-items:center; gap:14px;
+  padding-top:24px; border-top:1px solid var(--bdr);
+  flex-wrap:wrap;
+}
+.avs { display:flex; }
+.av {
+  width:32px; height:32px; border-radius:50%;
+  border:2px solid #fff; margin-right:-8px; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  font-size:.75rem; font-weight:700; color:#fff;
+}
+.trust-txt strong { display:block; font-size:.9375rem; font-weight:700; color:var(--dark); }
+.trust-txt span   { font-size:.8125rem; color:var(--mid); }
 
-/* SERVIÇOS */
-.services{background:var(--white);}
-.services-intro{margin-bottom:32px;}
-.services-intro p{font-size:14px;line-height:1.8;color:var(--text-mid);margin-top:14px;}
-.services-cta-mini{
-  background:var(--teal-pale);border-radius:14px;padding:20px;
-  display:flex;flex-direction:column;gap:10px;margin-top:20px;
+/* hero cards */
+.hero-cards { display:flex; flex-direction:column; gap:12px; }
+.hcard {
+  background:#fff; border:1px solid var(--bdr); border-radius:var(--r);
+  padding:18px; display:flex; align-items:center; gap:14px;
+  transition:border-color .2s;
 }
-.services-cta-mini h4{font-family:'Syne',sans-serif;font-weight:700;color:var(--teal);font-size:14px;}
-.services-cta-mini p{font-size:12px;color:var(--text-mid);}
-.services-cta-mini a{color:var(--teal);font-size:12px;font-weight:600;text-decoration:none;}
-.services-list{display:grid;grid-template-columns:1fr;gap:12px;}
-.svc{
-  border:1.5px solid var(--border);border-radius:16px;padding:22px 20px;
-  transition:all .3s;cursor:pointer;position:relative;overflow:hidden;
+.hcard:hover { border-color:var(--teal); }
+.hcard-ico { font-size:1.75rem; flex-shrink:0; }
+.hcard h4 { font-size:.9375rem; font-weight:700; color:var(--dark); }
+.hcard p  { font-size:.8125rem; color:var(--mid); margin-top:2px; }
+.hcard-big {
+  background:var(--teal); color:#fff;
+  border-radius:var(--r); padding:20px;
+  text-align:center;
 }
-.svc::before{content:'';position:absolute;inset:0;background:var(--teal-pale);opacity:0;transition:opacity .3s;}
-.svc:hover{border-color:var(--teal);}
-.svc:hover::before{opacity:1;}
-.svc-content{position:relative;z-index:2;}
-.svc-emoji{font-size:28px;margin-bottom:12px;display:block;}
-.svc h3{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin-bottom:6px;color:var(--dark);}
-.svc p{font-size:13px;line-height:1.6;color:var(--text-mid);}
-.svc-tag{
-  display:inline-block;margin-top:10px;
-  background:rgba(10,124,110,.1);color:var(--teal);
-  padding:3px 10px;border-radius:100px;font-size:11px;font-weight:600;
+.hcard-big .num {
+  font-family:'Outfit',sans-serif; font-weight:900;
+  font-size:2.75rem; line-height:1; display:block;
 }
+.hcard-big span { font-size:.875rem; opacity:.85; font-weight:500; }
 
-/* EQUIPE */
-.team{background:var(--off-white);}
-.team-header{margin-bottom:32px;}
-.team-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
-.team-card{
-  background:white;border-radius:18px;overflow:hidden;
-  transition:all .3s;border:1px solid var(--border);
+/* ─────────────────────────────────────────
+   BAND
+───────────────────────────────────────── */
+.band {
+  background:var(--dark); overflow:hidden;
+  padding:14px 0;
 }
-.team-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(10,124,110,.1);}
-.team-photo{
-  height:160px;display:flex;align-items:center;justify-content:center;
-  position:relative;overflow:hidden;
+.band-track {
+  display:flex; gap:0;
+  animation:scroll 22s linear infinite;
+  width:max-content;
 }
-.team-photo svg{width:64px;opacity:.3;color:white;}
-.team-photo-badge{
-  position:absolute;top:10px;right:10px;
-  background:white;border-radius:100px;padding:3px 10px;
-  font-size:10px;font-weight:600;color:var(--teal);
+@keyframes scroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+.band-item {
+  display:flex; align-items:center; gap:10px;
+  padding:0 28px; font-size:.8125rem; font-weight:500;
+  color:rgba(255,255,255,.55); white-space:nowrap; flex-shrink:0;
 }
-.team-body{padding:16px;}
-.team-body h3{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:3px;}
-.team-body .spec{font-size:11px;color:var(--teal);font-weight:500;margin-bottom:6px;}
-.team-body .desc{font-size:11px;color:var(--text-mid);line-height:1.5;}
+.band-dot { width:5px; height:5px; background:var(--teal-2); border-radius:50%; flex-shrink:0; }
 
-/* TESTIMONIALS */
-.testimonials{background:var(--white);}
-.test-header{margin-bottom:28px;}
-.test-summary{font-size:13px;color:var(--text-mid);margin-top:8px;}
-.test-summary strong{color:var(--dark);}
-.testimonials-grid{display:grid;grid-template-columns:1fr;gap:14px;}
-.test-card{
-  border:1.5px solid var(--border);border-radius:18px;padding:24px 20px;
-  transition:all .3s;
+/* ─────────────────────────────────────────
+   SERVIÇOS
+───────────────────────────────────────── */
+.services { background:var(--bg); }
+.sec-lbl { font-size:.75rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--teal); }
+.sec-title {
+  font-family:'Outfit',sans-serif; font-weight:900;
+  font-size:clamp(1.75rem, 5vw, 3rem);
+  line-height:1.1; letter-spacing:-.03em; color:var(--dark);
+  margin-top:8px;
 }
-.test-card:hover{border-color:var(--teal);box-shadow:0 6px 24px rgba(10,124,110,.08);}
-.test-stars{color:#F5A623;font-size:13px;margin-bottom:12px;letter-spacing:1px;}
-.test-quote{font-size:14px;line-height:1.75;color:var(--text);margin-bottom:18px;font-style:italic;}
-.test-author{display:flex;align-items:center;gap:10px;}
-.test-ava{
-  width:38px;height:38px;border-radius:50%;flex-shrink:0;
-  background:linear-gradient(135deg,var(--teal-pale),var(--teal));
-  display:flex;align-items:center;justify-content:center;
-  font-family:'Syne',sans-serif;font-weight:700;color:var(--teal);font-size:14px;
-}
-.test-info strong{display:block;font-size:13px;font-weight:600;}
-.test-info span{font-size:11px;color:var(--text-mid);}
-.test-featured{background:var(--teal);border-color:var(--teal);color:white;}
-.test-featured .test-quote{color:rgba(255,255,255,.9);}
-.test-featured .test-ava{background:rgba(255,255,255,.15);color:white;}
-.test-featured .test-info strong{color:white;}
-.test-featured .test-info span{color:rgba(255,255,255,.7);}
-.test-featured .test-stars{color:#FFD700;}
+.sec-title em { font-style:normal; color:var(--teal); }
+.sec-sub { font-size:1rem; color:var(--mid); line-height:1.75; margin-top:10px; max-width:540px; }
+.sec-head { margin-bottom:44px; }
 
-/* CTA */
-.cta-section{background:var(--dark);color:white;padding:72px 20px;}
-.cta-section h2{
-  font-family:'Syne',sans-serif;font-size:clamp(30px,8vw,52px);
-  font-weight:800;letter-spacing:-1.5px;line-height:1.1;margin-bottom:16px;
+.svc-layout { display:flex; flex-direction:column; gap:40px; }
+.svc-intro-box {
+  background:var(--teal-pale); border-radius:14px; padding:24px;
 }
-.cta-section h2 span{color:var(--teal-light);}
-.cta-section > p{font-size:14px;color:rgba(255,255,255,.6);line-height:1.7;margin-bottom:32px;}
-.cta-form{display:flex;flex-direction:column;gap:12px;}
-.cta-input{
-  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);
-  border-radius:10px;padding:13px 16px;color:white;font-size:14px;font-family:inherit;
-  outline:none;transition:border-color .2s;width:100%;
-}
-.cta-input::placeholder{color:rgba(255,255,255,.4);}
-.cta-input:focus{border-color:var(--teal-light);}
-.cta-btn{
-  background:var(--teal-light);color:white;border:none;border-radius:10px;
-  padding:15px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;
-  transition:all .25s;
-}
-.cta-btn:hover{background:var(--teal);}
-.cta-contacts{display:flex;flex-direction:column;gap:10px;margin-top:20px;}
-.contact-chip{
-  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);
-  color:rgba(255,255,255,.75);border-radius:100px;padding:10px 20px;
-  font-size:13px;text-decoration:none;transition:all .2s;text-align:center;
-}
-.contact-chip:hover{background:rgba(10,124,110,.3);color:white;}
+.svc-intro-box h4 { font-size:1rem; font-weight:700; color:var(--teal); margin-bottom:6px; }
+.svc-intro-box p { font-size:.875rem; color:var(--mid); margin-bottom:12px; }
+.svc-intro-box a { font-size:.875rem; font-weight:700; color:var(--teal); }
 
-/* FOOTER */
-footer{background:#0A0F0E;padding:48px 20px 28px;color:rgba(255,255,255,.5);}
-.footer-logo{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:white;margin-bottom:10px;}
-.footer-logo span{color:var(--teal-light);}
-.footer-desc{font-size:13px;line-height:1.7;margin-bottom:36px;}
-.footer-cols{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:36px;}
-footer h4{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.75);margin-bottom:12px;font-weight:600;}
-footer ul{list-style:none;display:flex;flex-direction:column;gap:9px;}
-footer ul a{color:rgba(255,255,255,.4);font-size:13px;text-decoration:none;transition:color .2s;}
-footer ul a:hover{color:var(--teal-light);}
-.footer-bottom{
-  padding-top:20px;border-top:1px solid rgba(255,255,255,.06);
-  font-size:12px;display:flex;flex-direction:column;gap:4px;
+.svc-grid { display:grid; grid-template-columns:1fr; gap:12px; }
+.svc {
+  border:1.5px solid var(--bdr); border-radius:14px;
+  padding:22px 20px; transition:all .25s; cursor:pointer;
+  position:relative; overflow:hidden;
+}
+.svc::before {
+  content:''; position:absolute; inset:0;
+  background:var(--teal-pale); opacity:0; transition:opacity .25s;
+}
+.svc:hover { border-color:var(--teal); }
+.svc:hover::before { opacity:1; }
+.svc-inner { position:relative; z-index:2; }
+.svc-ico  { font-size:1.875rem; display:block; margin-bottom:10px; }
+.svc h3   { font-family:'Outfit',sans-serif; font-weight:800; font-size:1.0625rem; color:var(--dark); margin-bottom:6px; }
+.svc p    { font-size:.875rem; line-height:1.65; color:var(--mid); }
+.svc-badge {
+  display:inline-block; margin-top:10px;
+  background:rgba(9,122,108,.12); color:var(--teal);
+  padding:3px 12px; border-radius:100px;
+  font-size:.75rem; font-weight:700;
 }
 
-/* ── TABLET / DESKTOP ── */
-@media(min-width:640px){
-  nav{padding:0 40px;}
-  .hero{padding:64px 40px;}
-  .hero-actions{flex-direction:row;flex-wrap:wrap;}
-  .btn-teal,.btn-wa{width:auto;}
-  .services-list{grid-template-columns:1fr 1fr;}
-  .team-grid{grid-template-columns:repeat(4,1fr);}
-  .testimonials-grid{grid-template-columns:1fr 1fr;}
-  .test-featured{grid-column:span 2;}
-  .cta-contacts{flex-direction:row;flex-wrap:wrap;justify-content:center;}
-  .contact-chip{text-align:left;}
-  .footer-cols{grid-template-columns:repeat(4,1fr);}
-  .footer-bottom{flex-direction:row;justify-content:space-between;}
-  .section{padding:80px 40px;}
+/* ─────────────────────────────────────────
+   EQUIPE
+───────────────────────────────────────── */
+.team { background:var(--off); }
+.team-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
+.tcard-team {
+  background:#fff; border-radius:14px; overflow:hidden;
+  border:1px solid var(--bdr); transition:all .25s;
+}
+.tcard-team:hover { transform:translateY(-4px); box-shadow:0 14px 40px rgba(9,122,108,.1); }
+.tcard-photo {
+  height:160px; display:flex; align-items:center; justify-content:center;
+  font-size:2.5rem; position:relative;
+}
+.tcard-badge {
+  position:absolute; top:10px; right:10px;
+  background:#fff; border-radius:100px; padding:3px 10px;
+  font-size:.6875rem; font-weight:700; color:var(--teal);
+}
+.tcard-body { padding:14px 16px; }
+.tcard-body h3 { font-family:'Outfit',sans-serif; font-weight:800; font-size:1rem; color:var(--dark); }
+.tcard-spec  { font-size:.8125rem; font-weight:600; color:var(--teal); margin-top:2px; display:block; }
+.tcard-desc  { font-size:.8125rem; color:var(--mid); margin-top:5px; line-height:1.5; }
+
+/* ─────────────────────────────────────────
+   DEPOIMENTOS
+───────────────────────────────────────── */
+.testimonials { background:var(--bg); }
+.test-grid { display:grid; grid-template-columns:1fr; gap:12px; }
+.tc {
+  border:1.5px solid var(--bdr); border-radius:14px;
+  padding:22px 20px; transition:border-color .25s;
+}
+.tc:hover { border-color:var(--teal); }
+.tc.featured { background:var(--teal); border-color:var(--teal); }
+.tc-stars { color:#F5A623; font-size:.875rem; margin-bottom:10px; letter-spacing:.08em; }
+.tc.featured .tc-stars { color:#FFD700; }
+.tc-q {
+  font-size:.9375rem; line-height:1.75; color:var(--text);
+  margin-bottom:16px; font-style:normal;
+}
+.tc.featured .tc-q { color:rgba(255,255,255,.92); }
+.tc-author { display:flex; align-items:center; gap:10px; }
+.tc-av {
+  width:38px; height:38px; border-radius:50%; flex-shrink:0;
+  background:var(--teal); color:#fff;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Outfit',sans-serif; font-weight:800; font-size:1rem;
+}
+.tc.featured .tc-av { background:rgba(255,255,255,.2); }
+.tc-name strong { display:block; font-size:.9375rem; font-weight:700; }
+.tc-name span   { font-size:.8125rem; color:var(--mid); }
+.tc.featured .tc-name strong { color:#fff; }
+.tc.featured .tc-name span   { color:rgba(255,255,255,.7); }
+
+/* ─────────────────────────────────────────
+   CTA FINAL
+───────────────────────────────────────── */
+.cta-section { background:var(--dark); color:#fff; padding:80px 0; }
+.cta-inner { display:flex; flex-direction:column; gap:40px; }
+.cta-left h2 {
+  font-family:'Outfit',sans-serif; font-weight:900;
+  font-size:clamp(1.875rem,5vw,3.25rem);
+  line-height:1.1; letter-spacing:-.03em; margin-bottom:12px;
+}
+.cta-left h2 em { font-style:normal; color:var(--teal-2); }
+.cta-left p { font-size:1rem; color:rgba(255,255,255,.6); line-height:1.75; margin-bottom:20px; }
+.cta-chips { display:flex; flex-wrap:wrap; gap:10px; }
+.chip {
+  background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.12);
+  color:rgba(255,255,255,.8); border-radius:100px; padding:10px 18px;
+  font-size:.875rem; font-weight:500; transition:all .2s;
+}
+.chip:hover { background:rgba(9,122,108,.3); color:#fff; }
+.cta-right { display:flex; flex-direction:column; gap:12px; }
+.cta-form-label { font-size:.75rem; font-weight:600; color:rgba(255,255,255,.6); margin-bottom:4px; letter-spacing:.05em; text-transform:uppercase; }
+.cta-input {
+  background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.14);
+  border-radius:var(--r); padding:13px 16px;
+  color:#fff; font-size:.9375rem; font-family:inherit;
+  outline:none; transition:border-color .2s; width:100%;
+}
+.cta-input::placeholder { color:rgba(255,255,255,.38); }
+.cta-input:focus { border-color:var(--teal-2); }
+.cta-btn {
+  background:var(--teal-2); color:#fff;
+  border:none; border-radius:var(--r); padding:15px;
+  font-size:1rem; font-weight:700; cursor:pointer;
+  font-family:inherit; transition:background .2s;
+}
+.cta-btn:hover { background:var(--teal); }
+
+/* ─────────────────────────────────────────
+   FOOTER
+───────────────────────────────────────── */
+footer {
+  background:#080F0E; padding:52px 0 28px;
+  color:rgba(255,255,255,.42); font-size:.875rem;
+}
+.footer-grid {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:28px; margin-bottom:36px;
+}
+.footer-brand h2 {
+  font-family:'Outfit',sans-serif; font-weight:900;
+  font-size:1.25rem; color:#fff; margin-bottom:10px;
+}
+.footer-brand h2 em { font-style:normal; color:var(--teal-2); }
+.footer-brand p { line-height:1.7; font-size:.875rem; }
+footer h4 {
+  font-size:.6875rem; font-weight:700; letter-spacing:.1em;
+  text-transform:uppercase; color:rgba(255,255,255,.72);
+  margin-bottom:12px;
+}
+footer ul { list-style:none; display:flex; flex-direction:column; gap:9px; }
+footer ul a { color:rgba(255,255,255,.38); transition:color .2s; }
+footer ul a:hover { color:var(--teal-2); }
+.footer-bottom {
+  padding-top:18px; border-top:1px solid rgba(255,255,255,.06);
+  display:flex; flex-direction:column; gap:4px;
+  font-size:.75rem;
 }
 
-@media(min-width:900px){
-  nav{padding:0 60px;height:72px;}
-  .nav-links{display:flex;}
-  .nav-logo{font-size:21px;}
-  .hero{flex-direction:row;align-items:center;padding:80px 60px;gap:60px;min-height:88vh;}
-  .hero-content{flex:1;}
-  .hero-card-area{flex:0 0 340px;}
-  .hero-actions{flex-direction:row;}
-  .services-layout{display:grid;grid-template-columns:1.1fr 2fr;gap:56px;align-items:start;}
-  .services-intro{margin-bottom:0;}
-  .services-list{grid-template-columns:1fr 1fr;}
-  .cta-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
-  .section{padding:100px 60px;}
-  footer{padding:60px 60px 32px;}
+/* ─────────────────────────────────────────
+   RESPONSIVO
+───────────────────────────────────────── */
+@media (min-width:640px) {
+  .wrap { padding:0 32px; }
+  .hero-btns .btn-teal, .hero-btns .btn-wa { width:auto; }
+  .svc-grid { grid-template-columns:repeat(2,1fr); }
+  .footer-grid { grid-template-columns:repeat(4,1fr); }
+  .footer-bottom { flex-direction:row; justify-content:space-between; }
+  .test-grid { grid-template-columns:1fr 1fr; }
+  .tc.featured { grid-column:span 2; }
 }
 
-@media(min-width:1200px){
-  nav{padding:0 80px;}
-  .hero{padding:80px 80px;}
-  .section{padding:120px 80px;}
-  footer{padding:72px 80px 40px;}
+@media (min-width:960px) {
+  .wrap { padding:0 48px; }
+  .nav-menu { display:flex; }
+  .nav-inner { height:70px; }
+  .section { padding:96px 0; }
+
+  .hero-inner { flex-direction:row; align-items:center; gap:56px; min-height:86vh; }
+  .hero-content { flex:1; }
+  .hero-cards { flex:0 0 320px; }
+  .hero-btns { flex-wrap:nowrap; }
+
+  .svc-layout { flex-direction:row; gap:56px; align-items:start; }
+  .svc-intro-side { flex:0 0 280px; }
+  .svc-grid { flex:1; grid-template-columns:repeat(2,1fr); }
+
+  .team-grid { grid-template-columns:repeat(4,1fr); }
+  .tcard-photo { height:180px; }
+
+  .cta-inner { flex-direction:row; gap:64px; align-items:start; }
+  .cta-left, .cta-right { flex:1; }
+}
+
+@media (min-width:1200px) {
+  .wrap { padding:0; }
 }
 </style>
 </head>
 <body>
 
-<nav>
-  <div class="nav-logo">move<span>on</span></div>
-  <ul class="nav-links">
-    <li><a href="#servicos">Serviços</a></li>
-    <li><a href="#equipe">Equipe</a></li>
-    <li><a href="#depoimentos">Depoimentos</a></li>
-    <li><a href="#contato">Contato</a></li>
-  </ul>
-  <a href="#contato" class="nav-pill">Agendar →</a>
-</nav>
+<!-- NAV -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="#" class="nav-logo">Conexão <em>Pilates</em></a>
+    <ul class="nav-menu">
+      <li><a href="#servicos">Serviços</a></li>
+      <li><a href="#equipe">Equipe</a></li>
+      <li><a href="#depoimentos">Depoimentos</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+    <a href="#contato" class="nav-pill">Agendar →</a>
+  </div>
+</header>
 
 <!-- HERO -->
-<section class="hero" id="inicio">
-  <div class="hero-content">
-    <div class="hero-tag">
-      <span class="hero-tag-dot"></span>
-      Aberto hoje · 7h às 20h
-    </div>
-    <h1>Fisioterapia que <span class="highlight">realmente</span> <span class="accent">funciona</span></h1>
-    <p class="hero-sub">Tratamentos especializados com tecnologia de ponta e abordagem totalmente personalizada. Mais de 2.400 pacientes recuperados em 12 anos.</p>
-    <div class="hero-actions">
-      <a href="#contato" class="btn-teal">Agendar avaliação gratuita →</a>
-      <a href="https://wa.me/5511999999999" class="btn-wa">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-        WhatsApp
-      </a>
-    </div>
-    <div class="hero-trust">
-      <div class="trust-avatars">
-        <div class="trust-avatar">C</div>
-        <div class="trust-avatar" style="background:linear-gradient(135deg,#fff0e8,var(--orange));color:#c44;">M</div>
-        <div class="trust-avatar" style="background:linear-gradient(135deg,#e8f4ff,#4a90d9);color:#247;">R</div>
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div class="hero-content">
+      <div class="hero-tag">
+        <span class="tag-dot"></span>
+        Aberto hoje · 7h às 20h
       </div>
-      <div class="trust-text">
-        <strong>2.400+ pacientes recuperados</strong>
-        <span>⭐ 4.9/5 — 680 avaliações no Google</span>
+      <h1 class="hero-title">
+        Fisioterapia que<br>
+        <span class="hl">realmente</span>
+        <span class="or"> funciona</span>
+      </h1>
+      <p class="hero-sub">Tratamentos especializados com tecnologia de ponta e abordagem totalmente personalizada. Mais de 2.400 pacientes recuperados em 12 anos.</p>
+      <div class="hero-btns">
+        <a href="#contato" class="btn-teal">Avaliação gratuita →</a>
+        <a href="https://wa.me/5511999999999" class="btn-wa">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          WhatsApp
+        </a>
       </div>
-    </div>
-  </div>
-  <div class="hero-card-area" style="display:flex;flex-direction:column;gap:14px;margin-top:32px;">
-    <div style="background:white;border:1px solid var(--border);border-radius:16px;padding:20px;display:flex;align-items:center;gap:14px;">
-      <span style="font-size:28px;">🏃</span>
-      <div>
-        <strong style="display:block;font-size:14px;color:var(--dark);">Retorno Esportivo</strong>
-        <span style="font-size:12px;color:var(--text-mid);">Protocolo especializado</span>
+      <div class="hero-trust">
+        <div class="avs">
+          <div class="av" style="background:var(--teal);">C</div>
+          <div class="av" style="background:#E8601A;">M</div>
+          <div class="av" style="background:#5A6AAA;">R</div>
+        </div>
+        <div class="trust-txt">
+          <strong>+2.400 pacientes recuperados</strong>
+          <span>⭐ 4.9/5 — 680 avaliações no Google</span>
+        </div>
       </div>
     </div>
-    <div style="background:var(--teal);border-radius:16px;padding:20px;color:white;">
-      <div style="font-family:'Syne',sans-serif;font-size:40px;font-weight:800;line-height:1;">98%</div>
-      <div style="font-size:13px;opacity:.85;">de satisfação dos pacientes</div>
-    </div>
-    <div style="background:white;border:1px solid var(--border);border-radius:16px;padding:20px;display:flex;align-items:center;gap:14px;">
-      <span style="font-size:28px;">🧠</span>
-      <div>
-        <strong style="display:block;font-size:14px;color:var(--dark);">Neurorreabilitação</strong>
-        <span style="font-size:12px;color:var(--text-mid);">AVC, Parkinson e mais</span>
+    <div class="hero-cards">
+      <div class="hcard">
+        <span class="hcard-ico">🏃</span>
+        <div><h4>Retorno Esportivo</h4><p>Protocolo especializado para atletas</p></div>
+      </div>
+      <div class="hcard-big">
+        <span class="num">98%</span>
+        <span>de satisfação dos pacientes</span>
+      </div>
+      <div class="hcard">
+        <span class="hcard-ico">🧠</span>
+        <div><h4>Neurorreabilitação</h4><p>AVC, Parkinson e muito mais</p></div>
       </div>
     </div>
   </div>
@@ -350,204 +464,179 @@ footer ul a:hover{color:var(--teal-light);}
 
 <!-- BAND -->
 <div class="band">
-  <div class="band-inner">
-    <div class="band-item"><span class="band-dot"></span> Fisioterapia Ortopédica</div>
-    <div class="band-item"><span class="band-dot"></span> Pilates Terapêutico</div>
-    <div class="band-item"><span class="band-dot"></span> Neurológica</div>
-    <div class="band-item"><span class="band-dot"></span> Esportiva</div>
-    <div class="band-item"><span class="band-dot"></span> Acupuntura</div>
-    <div class="band-item"><span class="band-dot"></span> RPG</div>
-    <div class="band-item"><span class="band-dot"></span> Pós-Cirúrgico</div>
-    <div class="band-item"><span class="band-dot"></span> Pediatria</div>
-    <div class="band-item"><span class="band-dot"></span> Fisioterapia Ortopédica</div>
-    <div class="band-item"><span class="band-dot"></span> Pilates Terapêutico</div>
-    <div class="band-item"><span class="band-dot"></span> Neurológica</div>
-    <div class="band-item"><span class="band-dot"></span> Esportiva</div>
-    <div class="band-item"><span class="band-dot"></span> Acupuntura</div>
-    <div class="band-item"><span class="band-dot"></span> RPG</div>
+  <div class="band-track">
+    <div class="band-item"><span class="band-dot"></span>Fisioterapia Ortopédica</div>
+    <div class="band-item"><span class="band-dot"></span>Pilates Terapêutico</div>
+    <div class="band-item"><span class="band-dot"></span>Neurológica</div>
+    <div class="band-item"><span class="band-dot"></span>Esportiva</div>
+    <div class="band-item"><span class="band-dot"></span>Acupuntura</div>
+    <div class="band-item"><span class="band-dot"></span>RPG Postural</div>
+    <div class="band-item"><span class="band-dot"></span>Pós-Cirúrgico</div>
+    <div class="band-item"><span class="band-dot"></span>Saúde da Mulher</div>
+    <div class="band-item"><span class="band-dot"></span>Fisioterapia Ortopédica</div>
+    <div class="band-item"><span class="band-dot"></span>Pilates Terapêutico</div>
+    <div class="band-item"><span class="band-dot"></span>Neurológica</div>
+    <div class="band-item"><span class="band-dot"></span>Esportiva</div>
+    <div class="band-item"><span class="band-dot"></span>Acupuntura</div>
+    <div class="band-item"><span class="band-dot"></span>RPG Postural</div>
+    <div class="band-item"><span class="band-dot"></span>Pós-Cirúrgico</div>
+    <div class="band-item"><span class="band-dot"></span>Saúde da Mulher</div>
   </div>
 </div>
 
 <!-- SERVIÇOS -->
 <section class="section services" id="servicos">
-  <div class="services-layout">
-    <div class="services-intro">
-      <div class="sec-label">O que oferecemos</div>
-      <h2 class="sec-title">Soluções para cada<br><span>necessidade sua</span></h2>
-      <p>Cada paciente chega com uma história única. Desenvolvemos protocolos personalizados integrando as melhores técnicas disponíveis.</p>
-      <div class="services-cta-mini">
-        <h4>Não sabe qual tratamento precisa?</h4>
-        <p>Nossa avaliação inicial identifica a melhor abordagem para você.</p>
-        <a href="#contato">Agendar avaliação gratuita →</a>
-      </div>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-lbl">O que oferecemos</span>
+      <h2 class="sec-title">Soluções para cada<br><em>necessidade sua</em></h2>
     </div>
-    <div class="services-list">
-      <div class="svc"><div class="svc-content"><span class="svc-emoji">🦴</span><h3>Ortopédica</h3><p>Lesões musculares, pós-cirúrgico, dores articulares e fraturas com protocolos baseados em evidências.</p><span class="svc-tag">Mais procurado</span></div></div>
-      <div class="svc"><div class="svc-content"><span class="svc-emoji">🧘</span><h3>Pilates Terapêutico</h3><p>Fortalecimento, equilíbrio e postura com o método Pilates aplicado como recurso terapêutico.</p></div></div>
-      <div class="svc"><div class="svc-content"><span class="svc-emoji">⚽</span><h3>Esportiva</h3><p>Prevenção, tratamento e retorno ao esporte com segurança e performance otimizada.</p><span class="svc-tag">Para atletas</span></div></div>
-      <div class="svc"><div class="svc-content"><span class="svc-emoji">🧠</span><h3>Neurológica</h3><p>Reabilitação para AVC, Parkinson e outras condições neurológicas com abordagem multidisciplinar.</p></div></div>
-      <div class="svc"><div class="svc-content"><span class="svc-emoji">📍</span><h3>Acupuntura</h3><p>Controle da dor e equilíbrio com acupuntura integrada à fisioterapia moderna.</p></div></div>
-      <div class="svc"><div class="svc-content"><span class="svc-emoji">🏛</span><h3>RPG</h3><p>Reeducação Postural Global para correção de desvios e dores crônicas na coluna vertebral.</p></div></div>
+    <div class="svc-layout">
+      <div class="svc-intro-side">
+        <p class="sec-sub">Cada paciente chega com uma história única. Desenvolvemos protocolos personalizados integrando as melhores técnicas disponíveis.</p>
+        <div class="svc-intro-box" style="margin-top:20px;">
+          <h4>Não sabe qual tratamento precisa?</h4>
+          <p>Nossa avaliação inicial identifica a melhor abordagem para o seu caso.</p>
+          <a href="#contato" style="font-size:.875rem; font-weight:700; color:var(--teal);">Agendar avaliação gratuita →</a>
+        </div>
+      </div>
+      <div class="svc-grid">
+        <div class="svc"><div class="svc-inner"><span class="svc-ico">🦴</span><h3>Ortopédica</h3><p>Lesões musculares, pós-cirúrgico e dores articulares com protocolos baseados em evidências.</p><span class="svc-badge">Mais procurado</span></div></div>
+        <div class="svc"><div class="svc-inner"><span class="svc-ico">🧘</span><h3>Pilates Terapêutico</h3><p>Fortalecimento, equilíbrio e postura com método Pilates como recurso terapêutico.</p></div></div>
+        <div class="svc"><div class="svc-inner"><span class="svc-ico">⚽</span><h3>Esportiva</h3><p>Prevenção, reabilitação e retorno ao esporte com segurança e performance.</p><span class="svc-badge">Para atletas</span></div></div>
+        <div class="svc"><div class="svc-inner"><span class="svc-ico">🧠</span><h3>Neurológica</h3><p>Reabilitação para AVC, Parkinson e outras condições neurológicas.</p></div></div>
+        <div class="svc"><div class="svc-inner"><span class="svc-ico">⚡</span><h3>Acupuntura</h3><p>Controle da dor e equilíbrio com acupuntura integrada à fisioterapia.</p></div></div>
+        <div class="svc"><div class="svc-inner"><span class="svc-ico">🏛</span><h3>RPG Postural</h3><p>Correção de desvios posturais e dores crônicas na coluna vertebral.</p></div></div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- EQUIPE -->
 <section class="section team" id="equipe">
-  <div class="team-header">
-    <div class="sec-label">Quem cuida de você</div>
-    <h2 class="sec-title">Nossa equipe de <span>especialistas</span></h2>
-  </div>
-  <div class="team-grid">
-    <div class="team-card">
-      <div class="team-photo" style="background:linear-gradient(135deg,var(--teal-pale),var(--teal));">
-        <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="28" r="16" stroke="white" stroke-width="1"/><path d="M12 68 C12 52 24 44 40 44 C56 44 68 52 68 68" stroke="white" stroke-width="1"/></svg>
-        <div class="team-photo-badge">Ortopédica</div>
-      </div>
-      <div class="team-body"><h3>Dra. Ana Carvalho</h3><div class="spec">Fisioterapia Ortopédica</div><div class="desc">15 anos · Pós-graduada UNIFESP</div></div>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-lbl">Quem cuida de você</span>
+      <h2 class="sec-title">Nossa equipe de <em>especialistas</em></h2>
     </div>
-    <div class="team-card">
-      <div class="team-photo" style="background:linear-gradient(135deg,var(--orange-pale),var(--orange));">
-        <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="28" r="16" stroke="white" stroke-width="1"/><path d="M12 68 C12 52 24 44 40 44 C56 44 68 52 68 68" stroke="white" stroke-width="1"/></svg>
-        <div class="team-photo-badge" style="color:var(--orange);">Neurológica</div>
+    <div class="team-grid">
+      <div class="tcard-team">
+        <div class="tcard-photo" style="background:linear-gradient(135deg,var(--teal-pale),var(--teal));">🧑‍⚕️<div class="tcard-badge">Ortopédica</div></div>
+        <div class="tcard-body"><h3>Dra. Ana Carvalho</h3><span class="tcard-spec">Fisioterapia Ortopédica</span><p class="tcard-desc">15 anos · Pós-graduada UNIFESP</p></div>
       </div>
-      <div class="team-body"><h3>Dr. Lucas Mendes</h3><div class="spec">Neurorreabilitação</div><div class="desc">Mestre USP · AVC e Parkinson</div></div>
-    </div>
-    <div class="team-card">
-      <div class="team-photo" style="background:linear-gradient(135deg,#EEF0FF,#5B6BD5);">
-        <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="28" r="16" stroke="white" stroke-width="1"/><path d="M12 68 C12 52 24 44 40 44 C56 44 68 52 68 68" stroke="white" stroke-width="1"/></svg>
-        <div class="team-photo-badge" style="color:#5B6BD5;">Pilates</div>
+      <div class="tcard-team">
+        <div class="tcard-photo" style="background:linear-gradient(135deg,var(--orange-pale),var(--orange));">👨‍⚕️<div class="tcard-badge" style="color:var(--orange);">Neurológica</div></div>
+        <div class="tcard-body"><h3>Dr. Lucas Mendes</h3><span class="tcard-spec">Neurorreabilitação</span><p class="tcard-desc">Mestre USP · AVC e Parkinson</p></div>
       </div>
-      <div class="team-body"><h3>Dra. Mariana Costa</h3><div class="spec">Pilates Terapêutico</div><div class="desc">BASI Certified · Gestantes</div></div>
-    </div>
-    <div class="team-card">
-      <div class="team-photo" style="background:linear-gradient(135deg,#FFF5E0,#F5A623);">
-        <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="28" r="16" stroke="white" stroke-width="1"/><path d="M12 68 C12 52 24 44 40 44 C56 44 68 52 68 68" stroke="white" stroke-width="1"/></svg>
-        <div class="team-photo-badge" style="color:#F5A623;">Esportiva</div>
+      <div class="tcard-team">
+        <div class="tcard-photo" style="background:linear-gradient(135deg,#EEF0FF,#5B6BD5);">🧑‍⚕️<div class="tcard-badge" style="color:#5B6BD5;">Pilates</div></div>
+        <div class="tcard-body"><h3>Dra. Mariana Costa</h3><span class="tcard-spec">Pilates Terapêutico</span><p class="tcard-desc">BASI Certified · Gestantes</p></div>
       </div>
-      <div class="team-body"><h3>Dr. Rafael Torres</h3><div class="spec">Fisioterapia Esportiva</div><div class="desc">Ex-fisio de atletas olímpicos</div></div>
+      <div class="tcard-team">
+        <div class="tcard-photo" style="background:linear-gradient(135deg,#FFF5E0,#F5A623);">👨‍⚕️<div class="tcard-badge" style="color:#C47A10;">Esportiva</div></div>
+        <div class="tcard-body"><h3>Dr. Rafael Torres</h3><span class="tcard-spec">Fisioterapia Esportiva</span><p class="tcard-desc">Ex-fisio de atletas olímpicos</p></div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- DEPOIMENTOS -->
 <section class="section testimonials" id="depoimentos">
-  <div class="test-header">
-    <div class="sec-label">Depoimentos reais</div>
-    <h2 class="sec-title">O que nossos pacientes<br><span>falam sobre nós</span></h2>
-    <p class="test-summary" style="margin-top:12px;"><strong>4.9/5</strong> com base em +680 avaliações no Google · <span style="color:#F5A623;">★★★★★</span></p>
-  </div>
-  <div class="testimonials-grid">
-    <div class="test-card test-featured">
-      <div class="test-stars">★★★★★</div>
-      <p class="test-quote">"Depois de cirurgia no ombro, fui indicado para a MoveOn. Em menos de 5 meses estava 100% recuperado e voltei às minhas atividades. Recomendo sem hesitar para qualquer pessoa que precise de fisioterapia séria e humanizada."</p>
-      <div class="test-author">
-        <div class="test-ava" style="background:rgba(255,255,255,.15);color:white;">T</div>
-        <div class="test-info"><strong>Thiago Rezende</strong><span>Pós-cirúrgico de ombro · 5 meses</span></div>
+  <div class="wrap">
+    <div class="sec-head" style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px;">
+      <div>
+        <span class="sec-lbl">Depoimentos reais</span>
+        <h2 class="sec-title" style="font-size:clamp(1.75rem,4vw,2.75rem);">O que nossos pacientes<br><em>falam sobre nós</em></h2>
       </div>
+      <p style="font-size:.9375rem; color:var(--mid);"><strong style="color:var(--dark);">4.9/5</strong> · <span style="color:#F5A623;">★★★★★</span> · +680 avaliações</p>
     </div>
-    <div class="test-card">
-      <div class="test-stars">★★★★★</div>
-      <p class="test-quote">"O Dr. Lucas fez milagres com minha mãe após um AVC. Cuidado técnico e humano de altíssimo nível."</p>
-      <div class="test-author">
-        <div class="test-ava">S</div>
-        <div class="test-info"><strong>Sandra Oliveira</strong><span>Neurológica</span></div>
+    <div class="test-grid">
+      <div class="tc featured">
+        <div class="tc-stars">★★★★★</div>
+        <p class="tc-q">Depois de cirurgia no ombro, fui indicado para a Conexão Pilates. Em menos de 5 meses estava 100% recuperado e voltei às minhas atividades. Recomendo sem hesitar para qualquer pessoa que precise de fisioterapia séria e humanizada.</p>
+        <div class="tc-author">
+          <div class="tc-av">T</div>
+          <div class="tc-name"><strong>Thiago Rezende</strong><span>Pós-cirúrgico de ombro · 5 meses</span></div>
+        </div>
       </div>
-    </div>
-    <div class="test-card">
-      <div class="test-stars">★★★★★</div>
-      <p class="test-quote">"Pilates durante toda a gestação. Menos dor nas costas e pós-parto muito mais tranquilo. Dra. Mariana é incrível!"</p>
-      <div class="test-author">
-        <div class="test-ava">J</div>
-        <div class="test-info"><strong>Juliana Pires</strong><span>Pilates Gestacional</span></div>
+      <div class="tc">
+        <div class="tc-stars">★★★★★</div>
+        <p class="tc-q">O Dr. Lucas fez milagres com minha mãe após um AVC. Cuidado técnico e humano de altíssimo nível.</p>
+        <div class="tc-author">
+          <div class="tc-av" style="background:var(--teal);">S</div>
+          <div class="tc-name"><strong>Sandra Oliveira</strong><span>Reabilitação Neurológica</span></div>
+        </div>
       </div>
-    </div>
-    <div class="test-card">
-      <div class="test-stars">★★★★★</div>
-      <p class="test-quote">"Dor lombar por 6 anos. Com RPG e acupuntura resolvi o que nenhum outro tratamento tinha conseguido."</p>
-      <div class="test-author">
-        <div class="test-ava">P</div>
-        <div class="test-info"><strong>Paulo Henrique</strong><span>Dor Crônica — Coluna</span></div>
+      <div class="tc">
+        <div class="tc-stars">★★★★★</div>
+        <p class="tc-q">Pilates durante toda a gestação. Menos dor nas costas e pós-parto muito mais tranquilo. Dra. Mariana é incrível!</p>
+        <div class="tc-author">
+          <div class="tc-av" style="background:#7A5AAA;">J</div>
+          <div class="tc-name"><strong>Juliana Pires</strong><span>Pilates Gestacional</span></div>
+        </div>
+      </div>
+      <div class="tc">
+        <div class="tc-stars">★★★★★</div>
+        <p class="tc-q">Dor lombar por 6 anos. Com RPG e acupuntura resolvi o que nenhum outro tratamento tinha conseguido.</p>
+        <div class="tc-author">
+          <div class="tc-av" style="background:#5A6AAA;">P</div>
+          <div class="tc-name"><strong>Paulo Henrique</strong><span>Dor Crônica — Coluna</span></div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CTA FINAL -->
-<section class="section cta-section" id="contato">
-  <div class="cta-inner">
-    <div>
-      <h2>Comece sua <span>recuperação</span> hoje mesmo</h2>
-      <p>Agende sua avaliação inicial e receba um plano de tratamento personalizado.</p>
-      <div class="cta-contacts">
-        <a href="tel:+5511999999999" class="contact-chip">📞 (11) 9999-9999</a>
-        <a href="https://wa.me/5511999999999" class="contact-chip">💬 WhatsApp</a>
-        <a href="#" class="contact-chip">📍 Como chegar</a>
+<!-- CTA -->
+<section class="cta-section" id="contato">
+  <div class="wrap">
+    <div class="cta-inner">
+      <div class="cta-left">
+        <h2>Comece sua <em>recuperação</em> hoje mesmo</h2>
+        <p>Agende sua avaliação inicial e receba um plano de tratamento personalizado. Nossa equipe está pronta para te ajudar.</p>
+        <div class="cta-chips">
+          <a href="tel:+5511999999999" class="chip">📞 (11) 9999-9999</a>
+          <a href="https://wa.me/5511999999999" class="chip">💬 WhatsApp</a>
+          <a href="#" class="chip">📍 Como chegar</a>
+        </div>
+        <p style="font-size:.8125rem; color:rgba(255,255,255,.35); margin-top:14px;">Seg–Sex 7h–20h · Sáb 8h–13h · Rua das Flores, 1234 · São Paulo</p>
       </div>
-      <p style="font-size:12px;color:rgba(255,255,255,.35);margin-top:16px;">Seg–Sex 7h–20h · Sáb 8h–13h · Rua das Flores, 1234 · São Paulo</p>
-    </div>
-    <div class="cta-form">
-      <p style="font-size:13px;color:rgba(255,255,255,.6);">Receba contato em até 2 horas</p>
-      <input type="text" placeholder="Seu nome" class="cta-input">
-      <input type="tel" placeholder="(11) 99999-9999" class="cta-input">
-      <input type="text" placeholder="Qual o seu problema ou necessidade?" class="cta-input">
-      <select class="cta-input" style="cursor:pointer;">
-        <option value="" disabled selected>Serviço de interesse...</option>
-        <option>Fisioterapia Ortopédica</option>
-        <option>Pilates Terapêutico</option>
-        <option>Fisioterapia Esportiva</option>
-        <option>Neurológica</option>
-        <option>RPG / Postura</option>
-        <option>Acupuntura</option>
-      </select>
-      <button class="cta-btn">Quero agendar minha avaliação gratuita →</button>
+      <div class="cta-right">
+        <p class="cta-form-label">Receba contato em até 2 horas</p>
+        <input type="text" placeholder="Seu nome completo" class="cta-input">
+        <input type="tel"  placeholder="(11) 99999-9999" class="cta-input">
+        <input type="text" placeholder="Sua queixa ou necessidade" class="cta-input">
+        <select class="cta-input" style="cursor:pointer;">
+          <option value="" disabled selected>Serviço de interesse…</option>
+          <option>Fisioterapia Ortopédica</option>
+          <option>Pilates Terapêutico</option>
+          <option>Fisioterapia Esportiva</option>
+          <option>Neurológica</option>
+          <option>RPG / Postura</option>
+          <option>Acupuntura</option>
+        </select>
+        <button class="cta-btn">Quero agendar minha avaliação gratuita →</button>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">move<span>on</span></div>
-  <p class="footer-desc">Fisioterapia moderna com resultados comprovados. Seu movimento, nossa missão.</p>
-  <div class="footer-cols">
-    <div>
-      <h4>Serviços</h4>
-      <ul>
-        <li><a href="#">Ortopédica</a></li>
-        <li><a href="#">Pilates</a></li>
-        <li><a href="#">Esportiva</a></li>
-        <li><a href="#">Neurológica</a></li>
-      </ul>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h2>Conexão <em>Pilates</em></h2>
+        <p>Fisioterapia moderna com resultados comprovados. Seu movimento, nossa missão.</p>
+      </div>
+      <div><h4>Serviços</h4><ul><li><a href="#">Ortopédica</a></li><li><a href="#">Pilates</a></li><li><a href="#">Esportiva</a></li><li><a href="#">Neurológica</a></li></ul></div>
+      <div><h4>Clínica</h4><ul><li><a href="#">Nossa Equipe</a></li><li><a href="#">Convênios</a></li><li><a href="#">Blog</a></li><li><a href="#">Carreiras</a></li></ul></div>
+      <div><h4>Contato</h4><ul><li><a href="#">(11) 9999-9999</a></li><li><a href="#">WhatsApp</a></li><li><a href="#">Instagram</a></li><li><a href="#">Google Maps</a></li></ul></div>
     </div>
-    <div>
-      <h4>Clínica</h4>
-      <ul>
-        <li><a href="#">Nossa Equipe</a></li>
-        <li><a href="#">Convênios</a></li>
-        <li><a href="#">Blog</a></li>
-        <li><a href="#">Carreiras</a></li>
-      </ul>
+    <div class="footer-bottom">
+      <span>© 2024 Conexão Pilates · Todos os direitos reservados</span>
+      <span>CREFITO Registrado · Rio de Janeiro, RJ </span>
     </div>
-    <div>
-      <h4>Contato</h4>
-      <ul>
-        <li><a href="#">(11) 9999-9999</a></li>
-        <li><a href="#">WhatsApp</a></li>
-        <li><a href="#">Instagram</a></li>
-        <li><a href="#">Google Maps</a></li>
-      </ul>
-    </div>
-    <div>
-      <h4>Horários</h4>
-      <ul>
-        <li><a href="#">Seg–Sex: 7h–20h</a></li>
-        <li><a href="#">Sábado: 8h–13h</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>© 2024 MoveOn Fisioterapia</p>
-    <p>CREFITO Registrado · Rio de Janeiro, RJ</p>
   </div>
 </footer>
 
