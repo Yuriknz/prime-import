@@ -1,0 +1,25 @@
+{
+  "name": "Texas Beer — Comanda",
+  "short_name": "Texas Beer",
+  "description": "Sistema de comanda e gestão de sessões de poker do Texas Beer",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0c1e17",
+  "theme_color": "#0c1e17",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}
