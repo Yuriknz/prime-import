@@ -346,6 +346,7 @@ export type Database = {
           data_inicio: string
           id: string
           nome: string
+          rake_total: number | null
           status: Database["public"]["Enums"]["sessao_status"]
           taxa_casa_percentual: number
           taxa_casa_por_hora: number | null
@@ -358,6 +359,7 @@ export type Database = {
           data_inicio?: string
           id?: string
           nome: string
+          rake_total?: number | null
           status?: Database["public"]["Enums"]["sessao_status"]
           taxa_casa_percentual?: number
           taxa_casa_por_hora?: number | null
@@ -370,6 +372,7 @@ export type Database = {
           data_inicio?: string
           id?: string
           nome?: string
+          rake_total?: number | null
           status?: Database["public"]["Enums"]["sessao_status"]
           taxa_casa_percentual?: number
           taxa_casa_por_hora?: number | null
