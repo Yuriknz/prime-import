@@ -24,7 +24,22 @@ export async function proxy(request: NextRequest) {
   );
 
   // refresca a sessão se necessário (obrigatório para Server Components lerem o usuário atual)
-  await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  // Checagem otimista (só a partir da sessão, sem consultar `usuarios`): a
+  // checagem de role fica por conta de requireRole() nas páginas/layouts.
+  const { pathname } = request.nextUrl;
+  const isLoginRoute = pathname === "/login";
+
+  if (!user && !isLoginRoute) {
+    return NextResponse.redirect(new URL("/login", request.url));
+  }
+
+  if (user && isLoginRoute) {
+    return NextResponse.redirect(new URL("/mesas", request.url));
+  }
 
   return response;
 }

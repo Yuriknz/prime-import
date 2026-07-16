@@ -77,6 +77,7 @@ export type Database = {
           lancado_em: string
           lancado_por: string
           motivo_cancelamento: string | null
+          pedido_id: string
           preco_unitario_no_momento: number
           produto_id: string
           quantidade: number
@@ -88,6 +89,7 @@ export type Database = {
           lancado_em?: string
           lancado_por: string
           motivo_cancelamento?: string | null
+          pedido_id: string
           preco_unitario_no_momento: number
           produto_id: string
           quantidade: number
@@ -99,6 +101,7 @@ export type Database = {
           lancado_em?: string
           lancado_por?: string
           motivo_cancelamento?: string | null
+          pedido_id?: string
           preco_unitario_no_momento?: number
           produto_id?: string
           quantidade?: number
@@ -116,6 +119,13 @@ export type Database = {
             columns: ["lancado_por"]
             isOneToOne: false
             referencedRelation: "usuarios"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "itens_comanda_pedido_id_fkey"
+            columns: ["pedido_id"]
+            isOneToOne: false
+            referencedRelation: "pedidos"
             referencedColumns: ["id"]
           },
           {
@@ -399,7 +409,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      enviar_pedido: {
+        Args: { p_comanda_id: string; p_itens: Json }
+        Returns: undefined
+      }
     }
     Enums: {
       comanda_status: "aberta" | "aguardando_pagamento" | "fechada"
