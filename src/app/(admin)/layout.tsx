@@ -29,7 +29,13 @@ export default async function AdminLayout({ children }: { children: React.ReactN
       </header>
       <nav className="flex gap-1 overflow-x-auto border-b border-border/50 px-4 py-2">
         {NAV_LINKS.map((link) => (
-          <Button key={link.href} variant="ghost" size="sm" render={<Link href={link.href} />}>
+          <Button
+            key={link.href}
+            variant="ghost"
+            size="sm"
+            nativeButton={false}
+            render={<Link href={link.href} />}
+          >
             {link.label}
           </Button>
         ))}

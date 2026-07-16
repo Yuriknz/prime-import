@@ -50,42 +50,45 @@
 
 /*
   Texas Beer — paleta única (o app opera sempre no tema escuro
-  verde-feltro/âmbar/cream; não há alternância claro/escuro).
+  preto/amarelo; não há alternância claro/escuro). Identidade visual do
+  local: preto + amarelo de alta energia, escolhida entre 3 opções
+  apresentadas em preview (ver docs/fase-1-setup-e-schema.md para histórico
+  da paleta anterior verde-feltro/âmbar).
 */
 :root,
 .dark {
-  --background: #0c1e17;
-  --foreground: #f2ead9;
-  --card: #142e22;
-  --card-foreground: #f2ead9;
-  --popover: #142e22;
-  --popover-foreground: #f2ead9;
-  --primary: #c98a3a;
-  --primary-foreground: #1a1108;
-  --secondary: #1c3b2b;
-  --secondary-foreground: #f2ead9;
-  --muted: #1c3b2b;
-  --muted-foreground: #a8c2ae;
-  --accent: #d9a441;
-  --accent-foreground: #1a1108;
-  --destructive: #c0453b;
-  --border: color-mix(in oklab, #f2ead9 12%, transparent);
-  --input: color-mix(in oklab, #f2ead9 15%, transparent);
-  --ring: #c98a3a;
-  --chart-1: #c98a3a;
-  --chart-2: #6f9c7d;
-  --chart-3: #d9a441;
-  --chart-4: #3f6b52;
-  --chart-5: #e8d6ab;
-  --radius: 0.5rem;
-  --sidebar: #0f251c;
-  --sidebar-foreground: #f2ead9;
-  --sidebar-primary: #c98a3a;
-  --sidebar-primary-foreground: #1a1108;
-  --sidebar-accent: #1c3b2b;
-  --sidebar-accent-foreground: #f2ead9;
-  --sidebar-border: color-mix(in oklab, #f2ead9 12%, transparent);
-  --sidebar-ring: #c98a3a;
+  --background: #0d0d0d;
+  --foreground: #f5f5f0;
+  --card: #1a1a1a;
+  --card-foreground: #f5f5f0;
+  --popover: #1a1a1a;
+  --popover-foreground: #f5f5f0;
+  --primary: #f2c200;
+  --primary-foreground: #100f00;
+  --secondary: #242019;
+  --secondary-foreground: #f5f5f0;
+  --muted: #242019;
+  --muted-foreground: #b0aa96;
+  --accent: #ffd400;
+  --accent-foreground: #100f00;
+  --destructive: #ef4444;
+  --border: color-mix(in oklab, #f2c200 15%, transparent);
+  --input: color-mix(in oklab, #f2c200 18%, transparent);
+  --ring: #f2c200;
+  --chart-1: #f2c200;
+  --chart-2: #ffd400;
+  --chart-3: #b89400;
+  --chart-4: #5c4b00;
+  --chart-5: #f5f5f0;
+  --radius: 0.65rem;
+  --sidebar: #141414;
+  --sidebar-foreground: #f5f5f0;
+  --sidebar-primary: #f2c200;
+  --sidebar-primary-foreground: #100f00;
+  --sidebar-accent: #242019;
+  --sidebar-accent-foreground: #f5f5f0;
+  --sidebar-border: color-mix(in oklab, #f2c200 15%, transparent);
+  --sidebar-ring: #f2c200;
 }
 
 @layer base {

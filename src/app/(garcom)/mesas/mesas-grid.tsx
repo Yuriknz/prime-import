@@ -84,7 +84,7 @@ export function MesasGrid({ initialMesas }: { initialMesas: Mesa[] }) {
             if (event.key === "Enter" || event.key === " ") handleClick(mesa);
           }}
           className={cn(
-            "cursor-pointer items-center gap-2 p-4 text-center transition-opacity",
+            "cursor-pointer items-center gap-2 p-4 text-center transition-all hover:-translate-y-0.5 hover:ring-primary/40 active:translate-y-0",
             pendingMesaId === mesa.id && "opacity-50"
           )}
         >
