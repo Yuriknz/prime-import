@@ -3,6 +3,7 @@ import { requireRole } from "@/lib/auth";
 import { formatCurrency } from "@/lib/format";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { BackLink } from "@/components/back-link";
 import { ProdutoDialog } from "./produto-dialog";
 
 const SETOR_LABEL: Record<string, string> = {
@@ -23,6 +24,7 @@ export default async function ProdutosPage() {
 
   return (
     <div className="flex flex-1 flex-col gap-4 p-4">
+      <BackLink href="/admin" label="Início" />
       <div className="flex items-center justify-between">
         <h2 className="font-heading text-xl">Produtos</h2>
         <ProdutoDialog triggerLabel="Novo produto" />

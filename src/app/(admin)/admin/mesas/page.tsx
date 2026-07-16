@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { requireRole } from "@/lib/auth";
+import { BackLink } from "@/components/back-link";
 import { MesasAdminPanel } from "./mesas-admin-panel";
 
 export default async function MesasAdminPage() {
@@ -10,6 +11,7 @@ export default async function MesasAdminPage() {
 
   return (
     <div className="flex flex-1 flex-col gap-4 p-4">
+      <BackLink href="/admin" label="Início" />
       <h2 className="font-heading text-xl">Mesas</h2>
       <MesasAdminPanel mesas={mesas ?? []} />
     </div>

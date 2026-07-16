@@ -308,6 +308,7 @@ export type Database = {
           id: string
           participante_sessao_id: string
           registrado_por: string
+          tipo: Database["public"]["Enums"]["rebuy_tipo"]
           valor: number
         }
         Insert: {
@@ -315,6 +316,7 @@ export type Database = {
           id?: string
           participante_sessao_id: string
           registrado_por: string
+          tipo?: Database["public"]["Enums"]["rebuy_tipo"]
           valor: number
         }
         Update: {
@@ -322,6 +324,7 @@ export type Database = {
           id?: string
           participante_sessao_id?: string
           registrado_por?: string
+          tipo?: Database["public"]["Enums"]["rebuy_tipo"]
           valor?: number
         }
         Relationships: [
@@ -428,6 +431,7 @@ export type Database = {
       participante_status: "ativo" | "eliminado" | "cashout"
       pedido_status: "enviado" | "em_preparo" | "pronto"
       produto_setor: "bar" | "cozinha" | "churrasqueira"
+      rebuy_tipo: "rebuy" | "addon"
       sessao_status: "aberta" | "encerrada"
       sessao_tipo: "torneio" | "cash_game"
       user_role: "garcom" | "admin" | "operador_poker"
@@ -565,6 +569,7 @@ export const Constants = {
       participante_status: ["ativo", "eliminado", "cashout"],
       pedido_status: ["enviado", "em_preparo", "pronto"],
       produto_setor: ["bar", "cozinha", "churrasqueira"],
+      rebuy_tipo: ["rebuy", "addon"],
       sessao_status: ["aberta", "encerrada"],
       sessao_tipo: ["torneio", "cash_game"],
       user_role: ["garcom", "admin", "operador_poker"],

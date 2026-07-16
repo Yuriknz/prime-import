@@ -5,6 +5,7 @@ import { formatCurrency } from "@/lib/format";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { BackLink } from "@/components/back-link";
 import { Cardapio } from "./cardapio";
 import { FecharContaDialog } from "./fechar-conta-dialog";
 
@@ -57,7 +58,10 @@ export default async function ComandaPage({
 
   return (
     <div className="flex flex-1 flex-col gap-4 pb-4">
-      <Card className="mx-4 mt-4">
+      <div className="px-4 pt-4">
+        <BackLink href="/mesas" label="Mesas" />
+      </div>
+      <Card className="mx-4">
         <CardHeader className="flex-row items-center justify-between">
           <CardTitle>Mesa {comanda.mesas?.numero}</CardTitle>
           <Badge variant={comanda.status === "aberta" ? "secondary" : "destructive"}>

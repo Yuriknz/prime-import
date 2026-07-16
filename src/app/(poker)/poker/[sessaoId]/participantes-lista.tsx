@@ -143,7 +143,7 @@ export function ParticipantesLista({
         <TableRow>
           <TableHead>Jogador</TableHead>
           <TableHead>Buy-in</TableHead>
-          <TableHead>Rebuys</TableHead>
+          <TableHead>Rebuys/Add-ons</TableHead>
           <TableHead>Investido</TableHead>
           <TableHead>Status</TableHead>
           {sessaoAberta && <TableHead>Ações</TableHead>}
@@ -167,12 +167,19 @@ export function ParticipantesLista({
             {sessaoAberta && (
               <TableCell>
                 {participante.status === "ativo" && (
-                  <div className="flex gap-1.5">
+                  <div className="flex flex-wrap gap-1.5">
                     <ValorDialog
                       triggerLabel="Rebuy"
                       title={`Rebuy — ${participante.nomeJogador}`}
                       defaultValue={buyInPadrao}
-                      onConfirm={(valor) => registrarRebuy(sessaoId, participante.id, valor)}
+                      onConfirm={(valor) => registrarRebuy(sessaoId, participante.id, valor, "rebuy")}
+                    />
+                    <ValorDialog
+                      triggerLabel="Add-on"
+                      triggerVariant="secondary"
+                      title={`Add-on — ${participante.nomeJogador}`}
+                      defaultValue={buyInPadrao}
+                      onConfirm={(valor) => registrarRebuy(sessaoId, participante.id, valor, "addon")}
                     />
                     <ValorDialog
                       triggerLabel="Cash-out"

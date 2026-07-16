@@ -43,7 +43,8 @@ export async function registrarParticipante(
 export async function registrarRebuy(
   sessaoId: string,
   participanteId: string,
-  valor: number
+  valor: number,
+  tipo: "rebuy" | "addon" = "rebuy"
 ): Promise<ActionResult> {
   const usuario = await requireUsuario();
 
@@ -55,6 +56,7 @@ export async function registrarRebuy(
   const { error } = await supabase.from("rebuys").insert({
     participante_sessao_id: participanteId,
     valor,
+    tipo,
     registrado_por: usuario.id,
   });
 

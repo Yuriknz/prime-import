@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { BackLink } from "@/components/back-link";
 
 // Brasil não observa horário de verão desde 2019 — offset fixo é seguro aqui.
 const OFFSET_SAO_PAULO = "-03:00";
@@ -118,6 +119,7 @@ export default async function RelatoriosPage({
 
   return (
     <div className="flex flex-1 flex-col gap-6 p-4">
+      <BackLink href="/admin" label="Início" />
       <form method="get" className="flex flex-wrap items-end gap-2">
         <div className="space-y-1">
           <Label htmlFor="inicio">De</Label>

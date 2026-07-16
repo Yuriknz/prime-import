@@ -4,6 +4,7 @@ import { requireRole } from "@/lib/auth";
 import { formatCurrency } from "@/lib/format";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { BackLink } from "@/components/back-link";
 import { ParticipantesLista, type Participante } from "./participantes-lista";
 import { RegistrarParticipanteForm } from "./registrar-participante-form";
 import { EncerrarSessaoDialog } from "./encerrar-sessao-dialog";
@@ -54,9 +55,13 @@ export default async function SessaoPokerPage({
     .reduce((sum, participante) => sum + (participante.valorCashout ?? 0), 0);
   const hasAtivo = participantes.some((participante) => participante.status === "ativo");
   const aberta = sessao.status === "aberta";
+  const rakeSugerido =
+    aberta && sessao.tipo === "torneio" ? totalArrecadado * (Number(sessao.taxa_casa_percentual) / 100) : null;
+  const premioRealEstimado = rakeSugerido !== null ? totalArrecadado - rakeSugerido : null;
 
   return (
     <div className="flex flex-1 flex-col gap-4 p-4">
+      <BackLink href="/poker" label="Sessões" />
       <Card>
         <CardHeader className="flex-row items-center justify-between">
           <CardTitle>{sessao.nome}</CardTitle>
@@ -71,6 +76,17 @@ export default async function SessaoPokerPage({
             <span>Total arrecadado</span>
             <span className="font-money text-lg text-primary">{formatCurrency(totalArrecadado)}</span>
           </div>
+          {premioRealEstimado !== null && (
+            <div className="flex items-baseline justify-between text-foreground">
+              <span>Prêmio real estimado</span>
+              <span className="font-money text-lg">{formatCurrency(premioRealEstimado)}</span>
+            </div>
+          )}
+          {premioRealEstimado !== null && (
+            <p className="text-xs">
+              (rake de {sessao.taxa_casa_percentual}% já descontado — antes do add-on, ajusta ao vivo)
+            </p>
+          )}
           {!aberta && sessao.rake_total !== null && (
             <div className="flex items-baseline justify-between">
               <span>Rake</span>
