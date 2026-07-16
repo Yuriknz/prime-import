@@ -15,7 +15,7 @@ export type CurrentUsuario = {
 /** Home de cada role após login / ao tentar acessar uma rota fora do seu domínio. */
 export const ROLE_HOME: Record<UserRole, string> = {
   garcom: "/mesas",
-  admin: "/mesas",
+  admin: "/admin",
   operador_poker: "/poker",
 };
 

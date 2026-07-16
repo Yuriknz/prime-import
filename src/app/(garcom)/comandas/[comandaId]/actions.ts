@@ -36,14 +36,15 @@ export async function enviarPedido(
 export async function fecharComanda(
   comandaId: string,
   metodo: "dinheiro" | "cartao",
-  valor: number
+  valor: number,
+  taxaServicoValor: number
 ): Promise<ActionResult> {
   const usuario = await getCurrentUsuario();
   if (!usuario) {
     redirect("/login");
   }
 
-  if (valor <= 0) {
+  if (valor <= 0 || taxaServicoValor < 0) {
     return { error: "Valor inválido." };
   }
 
@@ -52,6 +53,7 @@ export async function fecharComanda(
   const { error: pagamentoError } = await supabase.from("pagamentos").insert({
     comanda_id: comandaId,
     valor,
+    taxa_servico_valor: taxaServicoValor,
     metodo,
     status: "pago",
     confirmado_em: new Date().toISOString(),

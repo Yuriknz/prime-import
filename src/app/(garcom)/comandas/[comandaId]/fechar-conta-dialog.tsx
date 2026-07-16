@@ -25,12 +25,13 @@ export function FecharContaDialog({ comandaId, total }: { comandaId: string; tot
   const [comTaxa, setComTaxa] = useState(false);
   const [isPending, startTransition] = useTransition();
 
-  const valorFinal = comTaxa ? total * (1 + TAXA_SERVICO_PERCENTUAL / 100) : total;
+  const taxaServicoValor = comTaxa ? total * (TAXA_SERVICO_PERCENTUAL / 100) : 0;
+  const valorFinal = total + taxaServicoValor;
   const valorPorPessoa = valorFinal / Math.max(1, pessoas);
 
   function handleFechar(metodo: "dinheiro" | "cartao") {
     startTransition(async () => {
-      const result = await fecharComanda(comandaId, metodo, valorFinal);
+      const result = await fecharComanda(comandaId, metodo, valorFinal, taxaServicoValor);
       if (result?.error) {
         toast.error(result.error);
       }

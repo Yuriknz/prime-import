@@ -168,6 +168,7 @@ export type Database = {
           mp_payment_id: string | null
           qr_code_base64: string | null
           status: Database["public"]["Enums"]["pagamento_status"]
+          taxa_servico_valor: number
           valor: number
         }
         Insert: {
@@ -179,6 +180,7 @@ export type Database = {
           mp_payment_id?: string | null
           qr_code_base64?: string | null
           status?: Database["public"]["Enums"]["pagamento_status"]
+          taxa_servico_valor?: number
           valor: number
         }
         Update: {
@@ -190,6 +192,7 @@ export type Database = {
           mp_payment_id?: string | null
           qr_code_base64?: string | null
           status?: Database["public"]["Enums"]["pagamento_status"]
+          taxa_servico_valor?: number
           valor?: number
         }
         Relationships: [
