@@ -16,7 +16,7 @@ export type CurrentUsuario = {
 export const ROLE_HOME: Record<UserRole, string> = {
   garcom: "/mesas",
   admin: "/admin",
-  operador_poker: "/poker",
+  operador_poker: "/conta-desativada",
 };
 
 /**

@@ -21,7 +21,6 @@ type Usuario = {
 
 const ROLES: { value: UserRole; label: string }[] = [
   { value: "garcom", label: "Garçom" },
-  { value: "operador_poker", label: "Poker" },
   { value: "admin", label: "Admin" },
 ];
 

@@ -2,10 +2,11 @@ import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const SECOES = [
-  { href: "/admin/relatorios", titulo: "Relatórios", descricao: "Vendas, produto mais vendido, comissão e fechamento de poker." },
-  { href: "/admin/produtos", titulo: "Produtos", descricao: "Cardápio: cadastrar, editar preço e disponibilidade." },
+  { href: "/admin/relatorios", titulo: "Relatórios", descricao: "Vendas, produto mais vendido e comissão por garçom." },
+  { href: "/admin/produtos", titulo: "Produtos", descricao: "Cardápio: cadastrar, editar preço, disponibilidade e dados fiscais." },
   { href: "/admin/mesas", titulo: "Mesas", descricao: "Cadastrar e remover mesas do salão." },
   { href: "/admin/usuarios", titulo: "Usuários", descricao: "Criar contas, ajustar role e ativar/desativar." },
+  { href: "/admin/notas-fiscais", titulo: "Notas fiscais", descricao: "Acompanhar e reemitir NFC-e pendentes." },
 ];
 
 export default function AdminHomePage() {

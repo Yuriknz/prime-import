@@ -44,7 +44,7 @@ export default async function RelatoriosPage({
 
   const supabase = await createClient();
 
-  const [{ data: pagamentos }, { data: itens }, { data: sessoes }] = await Promise.all([
+  const [{ data: pagamentos }, { data: itens }] = await Promise.all([
     supabase
       .from("pagamentos")
       .select("valor, taxa_servico_valor, confirmado_em, comandas(garcom_id, usuarios(nome))")
@@ -57,12 +57,6 @@ export default async function RelatoriosPage({
       .eq("cancelado", false)
       .gte("lancado_em", inicioTs)
       .lte("lancado_em", fimTs),
-    supabase
-      .from("sessoes_poker")
-      .select("id, nome, tipo, rake_total, data_fim, participantes_sessao(buy_in_inicial, rebuys(valor))")
-      .eq("status", "encerrada")
-      .gte("data_fim", inicioTs)
-      .lte("data_fim", fimTs),
   ]);
 
   const vendasPorDia = new Map<string, { total: number; qtd: number }>();
@@ -101,22 +95,6 @@ export default async function RelatoriosPage({
   }
   const comissoes = Array.from(porGarcom.entries()).sort(([, a], [, b]) => b.comissao - a.comissao);
 
-  const fechamentosPoker = (sessoes ?? []).map((sessao) => {
-    const arrecadado = (sessao.participantes_sessao ?? []).reduce((sum, participante) => {
-      const rebuysTotal = (participante.rebuys ?? []).reduce((s, r) => s + Number(r.valor), 0);
-      return sum + Number(participante.buy_in_inicial) + rebuysTotal;
-    }, 0);
-    const rake = Number(sessao.rake_total ?? 0);
-    return {
-      id: sessao.id,
-      nome: sessao.nome,
-      tipo: sessao.tipo,
-      arrecadado,
-      rake,
-      pool: arrecadado - rake,
-    };
-  });
-
   return (
     <div className="flex flex-1 flex-col gap-6 p-4">
       <BackLink href="/admin" label="Início" />
@@ -137,7 +115,7 @@ export default async function RelatoriosPage({
           <CardTitle>Vendas no período</CardTitle>
         </CardHeader>
         <CardContent className="space-y-3">
-          <div className="grid grid-cols-3 gap-3 text-sm">
+          <div className="grid grid-cols-1 gap-3 text-sm sm:grid-cols-3">
             <div>
               <p className="text-muted-foreground">Total</p>
               <p className="font-money text-lg text-primary">{formatCurrency(totalVendas)}</p>
@@ -226,40 +204,6 @@ export default async function RelatoriosPage({
                     <TableCell>{nome}</TableCell>
                     <TableCell className="font-money">{formatCurrency(dados.vendas)}</TableCell>
                     <TableCell className="font-money">{formatCurrency(dados.comissao)}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          )}
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardHeader>
-          <CardTitle>Fechamento de sessões de poker</CardTitle>
-        </CardHeader>
-        <CardContent>
-          {fechamentosPoker.length === 0 ? (
-            <p className="text-sm text-muted-foreground">Nenhuma sessão encerrada no período.</p>
-          ) : (
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Sessão</TableHead>
-                  <TableHead>Tipo</TableHead>
-                  <TableHead>Arrecadado</TableHead>
-                  <TableHead>Rake</TableHead>
-                  <TableHead>Pool</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {fechamentosPoker.map((sessao) => (
-                  <TableRow key={sessao.id}>
-                    <TableCell>{sessao.nome}</TableCell>
-                    <TableCell>{sessao.tipo === "torneio" ? "Torneio" : "Cash game"}</TableCell>
-                    <TableCell className="font-money">{formatCurrency(sessao.arrecadado)}</TableCell>
-                    <TableCell className="font-money">{formatCurrency(sessao.rake)}</TableCell>
-                    <TableCell className="font-money">{formatCurrency(sessao.pool)}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>

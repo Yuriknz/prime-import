@@ -158,6 +158,75 @@ export type Database = {
         }
         Relationships: []
       }
+      notas_fiscais: {
+        Row: {
+          atualizada_em: string
+          autorizada_em: string | null
+          chave_acesso: string | null
+          comanda_id: string
+          criada_em: string
+          erro_mensagem: string | null
+          id: string
+          pagamento_id: string | null
+          payload_enviado: Json | null
+          provider: string
+          provider_ref: string | null
+          resposta_provider: Json | null
+          status: Database["public"]["Enums"]["nota_fiscal_status"]
+          tentativas: number
+          valor_total: number
+        }
+        Insert: {
+          atualizada_em?: string
+          autorizada_em?: string | null
+          chave_acesso?: string | null
+          comanda_id: string
+          criada_em?: string
+          erro_mensagem?: string | null
+          id?: string
+          pagamento_id?: string | null
+          payload_enviado?: Json | null
+          provider?: string
+          provider_ref?: string | null
+          resposta_provider?: Json | null
+          status?: Database["public"]["Enums"]["nota_fiscal_status"]
+          tentativas?: number
+          valor_total: number
+        }
+        Update: {
+          atualizada_em?: string
+          autorizada_em?: string | null
+          chave_acesso?: string | null
+          comanda_id?: string
+          criada_em?: string
+          erro_mensagem?: string | null
+          id?: string
+          pagamento_id?: string | null
+          payload_enviado?: Json | null
+          provider?: string
+          provider_ref?: string | null
+          resposta_provider?: Json | null
+          status?: Database["public"]["Enums"]["nota_fiscal_status"]
+          tentativas?: number
+          valor_total?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notas_fiscais_comanda_id_fkey"
+            columns: ["comanda_id"]
+            isOneToOne: true
+            referencedRelation: "comandas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "notas_fiscais_pagamento_id_fkey"
+            columns: ["pagamento_id"]
+            isOneToOne: false
+            referencedRelation: "pagamentos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       pagamentos: {
         Row: {
           comanda_id: string
@@ -302,6 +371,50 @@ export type Database = {
         }
         Relationships: []
       }
+      produtos_fiscais: {
+        Row: {
+          atualizado_em: string
+          cest: string | null
+          cfop: string
+          csosn: string | null
+          cst: string | null
+          ncm: string
+          origem: number
+          produto_id: string
+          unidade_comercial: string
+        }
+        Insert: {
+          atualizado_em?: string
+          cest?: string | null
+          cfop?: string
+          csosn?: string | null
+          cst?: string | null
+          ncm: string
+          origem?: number
+          produto_id: string
+          unidade_comercial?: string
+        }
+        Update: {
+          atualizado_em?: string
+          cest?: string | null
+          cfop?: string
+          csosn?: string | null
+          cst?: string | null
+          ncm?: string
+          origem?: number
+          produto_id?: string
+          unidade_comercial?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "produtos_fiscais_produto_id_fkey"
+            columns: ["produto_id"]
+            isOneToOne: true
+            referencedRelation: "produtos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       rebuys: {
         Row: {
           criado_em: string
@@ -426,6 +539,12 @@ export type Database = {
     Enums: {
       comanda_status: "aberta" | "aguardando_pagamento" | "fechada"
       mesa_status: "livre" | "ocupada" | "aguardando_pagamento"
+      nota_fiscal_status:
+        | "pendente"
+        | "processando"
+        | "autorizada"
+        | "erro"
+        | "cancelada"
       pagamento_metodo: "pix" | "cartao" | "dinheiro"
       pagamento_status: "pendente" | "pago" | "expirado"
       participante_status: "ativo" | "eliminado" | "cashout"
@@ -564,6 +683,13 @@ export const Constants = {
     Enums: {
       comanda_status: ["aberta", "aguardando_pagamento", "fechada"],
       mesa_status: ["livre", "ocupada", "aguardando_pagamento"],
+      nota_fiscal_status: [
+        "pendente",
+        "processando",
+        "autorizada",
+        "erro",
+        "cancelada",
+      ],
       pagamento_metodo: ["pix", "cartao", "dinheiro"],
       pagamento_status: ["pendente", "pago", "expirado"],
       participante_status: ["ativo", "eliminado", "cashout"],

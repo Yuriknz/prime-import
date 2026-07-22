@@ -15,7 +15,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import type { Database } from "@/lib/supabase/types";
-import { atualizarProduto, criarProduto } from "./actions";
+import { atualizarDadosFiscais, atualizarProduto, criarProduto } from "./actions";
 
 type ProdutoSetor = Database["public"]["Enums"]["produto_setor"];
 
@@ -32,6 +32,15 @@ export type ProdutoExistente = {
   categoria: string;
   setorDestino: ProdutoSetor;
   disponivel: boolean;
+  fiscal?: {
+    ncm: string;
+    cfop: string;
+    unidadeComercial: string;
+    cest: string;
+    csosn: string;
+    cst: string;
+    origem: number;
+  };
 };
 
 export function ProdutoDialog({
@@ -47,6 +56,12 @@ export function ProdutoDialog({
   const [categoria, setCategoria] = useState(produto?.categoria ?? "");
   const [setorDestino, setSetorDestino] = useState<ProdutoSetor>(produto?.setorDestino ?? "bar");
   const [disponivel, setDisponivel] = useState(produto?.disponivel ?? true);
+  const [ncm, setNcm] = useState(produto?.fiscal?.ncm ?? "");
+  const [cfop, setCfop] = useState(produto?.fiscal?.cfop ?? "5102");
+  const [unidadeComercial, setUnidadeComercial] = useState(produto?.fiscal?.unidadeComercial ?? "UN");
+  const [cest, setCest] = useState(produto?.fiscal?.cest ?? "");
+  const [csosn, setCsosn] = useState(produto?.fiscal?.csosn ?? "500");
+  const [cst, setCst] = useState(produto?.fiscal?.cst ?? "");
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
 
@@ -60,6 +75,22 @@ export function ProdutoDialog({
       if (result?.error) {
         toast.error(result.error);
         return;
+      }
+
+      if (produto && ncm.trim()) {
+        const fiscalResult = await atualizarDadosFiscais(produto.id, {
+          ncm,
+          cfop,
+          unidadeComercial,
+          cest,
+          csosn,
+          cst,
+          origem: 0,
+        });
+        if (fiscalResult?.error) {
+          toast.error(fiscalResult.error);
+          return;
+        }
       }
 
       setOpen(false);
@@ -141,6 +172,44 @@ export function ProdutoDialog({
                   Indisponível
                 </Button>
               </div>
+            </div>
+          )}
+          {produto && (
+            <div className="space-y-3 border-t border-border/50 pt-3">
+              <Label className="text-sm font-medium">Dados fiscais (NFC-e)</Label>
+              <div className="grid grid-cols-2 gap-3">
+                <div className="space-y-1.5">
+                  <Label htmlFor="produto-ncm">NCM</Label>
+                  <Input id="produto-ncm" value={ncm} onChange={(event) => setNcm(event.target.value)} />
+                </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="produto-cfop">CFOP</Label>
+                  <Input id="produto-cfop" value={cfop} onChange={(event) => setCfop(event.target.value)} />
+                </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="produto-cest">CEST (bebidas)</Label>
+                  <Input id="produto-cest" value={cest} onChange={(event) => setCest(event.target.value)} />
+                </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="produto-unidade">Unidade</Label>
+                  <Input
+                    id="produto-unidade"
+                    value={unidadeComercial}
+                    onChange={(event) => setUnidadeComercial(event.target.value)}
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="produto-csosn">CSOSN (Simples Nacional)</Label>
+                  <Input id="produto-csosn" value={csosn} onChange={(event) => setCsosn(event.target.value)} />
+                </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="produto-cst">CST (regime normal)</Label>
+                  <Input id="produto-cst" value={cst} onChange={(event) => setCst(event.target.value)} />
+                </div>
+              </div>
+              <p className="text-xs text-muted-foreground">
+                Preencha NCM para salvar os dados fiscais. Informe CSOSN ou CST.
+              </p>
             </div>
           )}
         </div>

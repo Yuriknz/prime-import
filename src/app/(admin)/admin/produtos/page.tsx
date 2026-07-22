@@ -18,7 +18,9 @@ export default async function ProdutosPage() {
   const supabase = await createClient();
   const { data: produtos } = await supabase
     .from("produtos")
-    .select("id, nome, preco, categoria, setor_destino, disponivel")
+    .select(
+      "id, nome, preco, categoria, setor_destino, disponivel, produtos_fiscais(ncm, cfop, unidade_comercial, cest, csosn, cst, origem)"
+    )
     .order("categoria")
     .order("nome");
 
@@ -66,6 +68,17 @@ export default async function ProdutosPage() {
                       categoria: produto.categoria,
                       setorDestino: produto.setor_destino,
                       disponivel: produto.disponivel,
+                      fiscal: produto.produtos_fiscais
+                        ? {
+                            ncm: produto.produtos_fiscais.ncm,
+                            cfop: produto.produtos_fiscais.cfop,
+                            unidadeComercial: produto.produtos_fiscais.unidade_comercial,
+                            cest: produto.produtos_fiscais.cest ?? "",
+                            csosn: produto.produtos_fiscais.csosn ?? "",
+                            cst: produto.produtos_fiscais.cst ?? "",
+                            origem: produto.produtos_fiscais.origem,
+                          }
+                        : undefined,
                     }}
                   />
                 </TableCell>

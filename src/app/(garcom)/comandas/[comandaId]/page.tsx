@@ -35,7 +35,7 @@ export default async function ComandaPage({
     notFound();
   }
 
-  const [{ data: itens }, { data: produtos }] = await Promise.all([
+  const [{ data: itens }, { data: produtos }, { data: notaFiscal }] = await Promise.all([
     supabase
       .from("itens_comanda")
       .select("id, quantidade, preco_unitario_no_momento, produtos(nome), pedidos(status)")
@@ -48,6 +48,9 @@ export default async function ComandaPage({
       .eq("disponivel", true)
       .order("categoria")
       .order("nome"),
+    comanda.status === "fechada"
+      ? supabase.from("notas_fiscais").select("status").eq("comanda_id", comandaId).maybeSingle()
+      : Promise.resolve({ data: null }),
   ]);
 
   const total = (itens ?? []).reduce(
@@ -55,6 +58,14 @@ export default async function ComandaPage({
     0
   );
   const aberta = comanda.status !== "fechada";
+
+  const NOTA_FISCAL_LABEL: Record<string, string> = {
+    pendente: "Nota pendente",
+    processando: "Nota processando",
+    autorizada: "Nota emitida",
+    erro: "Erro na nota",
+    cancelada: "Nota cancelada",
+  };
 
   return (
     <div className="flex flex-1 flex-col gap-4 pb-4">
@@ -64,9 +75,16 @@ export default async function ComandaPage({
       <Card className="mx-4">
         <CardHeader className="flex-row items-center justify-between">
           <CardTitle>Mesa {comanda.mesas?.numero}</CardTitle>
-          <Badge variant={comanda.status === "aberta" ? "secondary" : "destructive"}>
-            {comanda.status === "aberta" ? "Aberta" : comanda.status === "fechada" ? "Fechada" : "Aguardando pagamento"}
-          </Badge>
+          <div className="flex items-center gap-2">
+            <Badge variant={comanda.status === "aberta" ? "secondary" : "destructive"}>
+              {comanda.status === "aberta" ? "Aberta" : comanda.status === "fechada" ? "Fechada" : "Aguardando pagamento"}
+            </Badge>
+            {notaFiscal && (
+              <Badge variant={notaFiscal.status === "autorizada" ? "default" : "secondary"}>
+                {NOTA_FISCAL_LABEL[notaFiscal.status] ?? notaFiscal.status}
+              </Badge>
+            )}
+          </div>
         </CardHeader>
         <CardContent className="flex items-baseline justify-between">
           <span className="text-muted-foreground">Total corrente</span>

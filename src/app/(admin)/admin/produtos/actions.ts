@@ -69,3 +69,45 @@ export async function atualizarProduto(
 
   revalidatePath("/admin/produtos");
 }
+
+export async function atualizarDadosFiscais(
+  produtoId: string,
+  dados: {
+    ncm: string;
+    cfop: string;
+    unidadeComercial: string;
+    cest: string;
+    csosn: string;
+    cst: string;
+    origem: number;
+  }
+): Promise<ActionResult> {
+  await requireRole(["admin"]);
+
+  if (!dados.ncm.trim() || !dados.cfop.trim() || !dados.unidadeComercial.trim()) {
+    return { error: "Preencha NCM, CFOP e unidade comercial." };
+  }
+
+  if (!dados.csosn.trim() && !dados.cst.trim()) {
+    return { error: "Informe CSOSN (Simples Nacional) ou CST (regime normal)." };
+  }
+
+  const supabase = await createClient();
+  const { error } = await supabase.from("produtos_fiscais").upsert({
+    produto_id: produtoId,
+    ncm: dados.ncm.trim(),
+    cfop: dados.cfop.trim(),
+    unidade_comercial: dados.unidadeComercial.trim(),
+    cest: dados.cest.trim() || null,
+    csosn: dados.csosn.trim() || null,
+    cst: dados.cst.trim() || null,
+    origem: dados.origem,
+    atualizado_em: new Date().toISOString(),
+  });
+
+  if (error) {
+    return { error: "Não foi possível salvar os dados fiscais." };
+  }
+
+  revalidatePath("/admin/produtos");
+}

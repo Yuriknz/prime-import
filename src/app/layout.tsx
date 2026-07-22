@@ -21,7 +21,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: "Texas Beer — Comanda",
-  description: "Sistema de comanda e gestão de sessões de poker do Texas Beer",
+  description: "Sistema de comanda e emissão de nota fiscal do Texas Beer",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
